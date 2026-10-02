@@ -13,10 +13,16 @@ import { WhatIBuildSection } from './components/sections/WhatIBuildSection';
 import { TechUniverseSection } from './components/sections/TechUniverseSection';
 import { FlagshipProjectsSection } from './components/sections/FlagshipProjectsSection';
 import { PyravexMissionSection } from './components/sections/PyravexMissionSection';
+import { VeridexaMissionSection } from './components/sections/VeridexaMissionSection';
+import { ChronoSatMissionSection } from './components/sections/ChronoSatMissionSection';
 import { ProjectExplorerSection } from './components/sections/ProjectExplorerSection';
 import { GitHubLiveSection } from './components/sections/GitHubLiveSection';
 import { HackathonJourneySection } from './components/sections/HackathonJourneySection';
 import { CodingJourneySection } from './components/sections/CodingJourneySection';
+import { AlgorithmEscapeSection } from './components/sections/AlgorithmEscapeSection';
+import { CodeReactorSection } from './components/sections/CodeReactorSection';
+import { SystemBuilderSection } from './components/sections/SystemBuilderSection';
+import { TechStackDetectiveSection } from './components/sections/TechStackDetectiveSection';
 import { CurrentlyBuildingSection } from './components/sections/CurrentlyBuildingSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
@@ -124,6 +130,12 @@ export function App() {
         {/* TASK 4: Pyravex Satellite Intelligence Mission Game */}
         <PyravexMissionSection />
 
+        {/* TASK 5: Veridexa Document Verification Intelligence Game */}
+        <VeridexaMissionSection />
+
+        {/* TASK 6: ChronoSat Temporal Time Machine Simulation */}
+        <ChronoSatMissionSection />
+
         {/* 7. Secondary Projects Explorer (Searchable Registry) */}
         <ProjectExplorerSection repos={repos} />
 
@@ -139,6 +151,18 @@ export function App() {
 
         {/* 10. Coding Journey: Beyond Projects & 3D DSA Graph */}
         <CodingJourneySection />
+
+        {/* TASK 7: Algorithm Escape Interactive DSA Puzzle Experience */}
+        <AlgorithmEscapeSection />
+
+        {/* TASK 8: Code Reactor Interactive Coding + Debugging Experience */}
+        <CodeReactorSection />
+
+        {/* TASK 9: System Builder Interactive Architecture Canvas */}
+        <SystemBuilderSection />
+
+        {/* TASK 10: Tech Stack Detective Interactive Experience */}
+        <TechStackDetectiveSection />
 
         {/* 11. Currently Building Terminal Dashboard */}
         <CurrentlyBuildingSection />

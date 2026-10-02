@@ -8,9 +8,12 @@ import {
   ShieldAlert,
   RotateCcw,
   Sparkles,
-  Info
+  Info,
+  ChevronRight,
+  RefreshCw,
+  Layers
 } from 'lucide-react';
-import { PYRAVEX_SCENARIO_01 } from '../../data/pyravexScenario';
+import { PYRAVEX_SCENARIOS } from '../../data/pyravexScenario';
 import { MissionIntro } from './MissionIntro';
 import { SatelliteConsoleMap } from './SatelliteConsoleMap';
 import { SignalInvestigationPanel } from './SignalInvestigationPanel';
@@ -24,6 +27,7 @@ interface PyravexAnomalyGameProps {
 }
 
 export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGameProps) {
+  const [scenarioIndex, setScenarioIndex] = useState<number>(0);
   const [status, setStatus] = useState<GameStatus>('INTRO');
   const [selectedSignal, setSelectedSignal] = useState<ThermalSignal | null>(null);
   const [investigatedSignalIds, setInvestigatedSignalIds] = useState<string[]>([]);
@@ -33,7 +37,7 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
   const [submittedSignal, setSubmittedSignal] = useState<ThermalSignal | null>(null);
   const [isSuccessResult, setIsSuccessResult] = useState<boolean>(false);
 
-  const scenario = PYRAVEX_SCENARIO_01;
+  const scenario = PYRAVEX_SCENARIOS[scenarioIndex];
 
   // Stopwatch timer interval
   useEffect(() => {
@@ -58,6 +62,12 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
     setAttemptsCount(0);
     setSubmittedSignal(null);
   }, []);
+
+  // Cycle scenario for replayability
+  const handleCycleScenario = useCallback(() => {
+    setScenarioIndex((prev) => (prev + 1) % PYRAVEX_SCENARIOS.length);
+    handleStartMission();
+  }, [handleStartMission]);
 
   // Select signal on map
   const handleSelectSignal = useCallback((signal: ThermalSignal) => {
@@ -102,6 +112,32 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
     setStatus('COMPLETE');
   }, []);
 
+  // Keyboard accessibility listeners (1-6 keys, Arrow keys, Escape)
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (status !== 'SCANNING' && status !== 'INVESTIGATING') return;
+
+      // Escape closes current panel
+      if (e.key === 'Escape' && selectedSignal) {
+        handleCloseInvestigation();
+        return;
+      }
+
+      // Number keys 1-6 select signal
+      const num = parseInt(e.key, 10);
+      if (num >= 1 && num <= scenario.signals.length) {
+        const targetSig = scenario.signals[num - 1];
+        if (targetSig) {
+          handleSelectSignal(targetSig);
+          playPathFeedback('tick');
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [status, selectedSignal, scenario.signals, handleCloseInvestigation, handleSelectSignal]);
+
   // Calculate score
   const simulationScore = Math.max(
     300,
@@ -136,6 +172,10 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
                   <span>PYRAVEX CONSOLE</span>
                   <span className="text-slate-600">/</span>
                   <span className="text-blue-400 font-bold">{scenario.missionNumber}</span>
+                  <span className="text-slate-600">|</span>
+                  <span className="text-amber-400 font-semibold text-[9px] uppercase">
+                    SCENARIO {scenarioIndex + 1}/{PYRAVEX_SCENARIOS.length}
+                  </span>
                 </div>
                 <div className="text-sm font-heading font-black text-white">
                   {scenario.title}
@@ -144,7 +184,7 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
             </div>
 
             {/* Live Metrics: Signals, Anomalies, Timer */}
-            <div className="flex items-center gap-4 text-[11px]">
+            <div className="flex items-center gap-2.5 sm:gap-4 text-[11px]">
               <div className="px-3 py-1.5 rounded-xl bg-[#05070B] border border-slate-800">
                 <span className="text-slate-400 text-[9px] block">OBSERVATIONS</span>
                 <span className="font-bold text-white">
@@ -160,13 +200,29 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
                 </span>
               </div>
 
+              {/* Scenario Switcher Button */}
+              {PYRAVEX_SCENARIOS.length > 1 && (
+                <button
+                  type="button"
+                  onClick={handleCycleScenario}
+                  data-cursor="pointer"
+                  title="Switch training scenario"
+                  aria-label="Switch training scenario"
+                  className="p-2 rounded-xl bg-[#05070B] border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 transition-colors flex items-center gap-1"
+                >
+                  <RefreshCw className="w-3.5 h-3.5" />
+                  <span className="text-[10px] hidden md:inline">ROTATE</span>
+                </button>
+              )}
+
+              {/* Restart Simulation */}
               <button
                 type="button"
                 onClick={handleStartMission}
                 data-cursor="pointer"
                 title="Restart simulation"
                 aria-label="Restart simulation"
-                className="p-2 rounded-xl bg-[#05070B] border border-slate-800 text-slate-400 hover:text-white transition-colors"
+                className="p-2 rounded-xl bg-[#05070B] border border-slate-800 text-slate-400 hover:text-white hover:border-slate-600 transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -196,14 +252,14 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
 
           {/* Quick Helper Banner */}
           {!selectedSignal && (
-            <div className="p-3 rounded-xl bg-[#080D16]/80 border border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
+            <div className="p-3.5 rounded-xl bg-[#080D16]/90 border border-slate-800 text-[11px] text-slate-300 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Info className="w-3.5 h-3.5 text-blue-400 shrink-0" />
+                <Info className="w-4 h-4 text-cyan-400 shrink-0" />
                 <span>
-                  Click any blinking satellite observation pin on the map to inspect its 7-day thermal timeline and characteristics.
+                  Select any observation pin on the map (or from the list) to inspect its 7-day thermal timeline, persistence, and contextual classification.
                 </span>
               </div>
-              <span className="text-[9px] text-slate-400 hidden sm:inline uppercase">
+              <span className="text-[9px] text-slate-400 hidden sm:inline uppercase font-bold">
                 TRAINING SIMULATION
               </span>
             </div>
@@ -221,7 +277,7 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
             investigatedCount={investigatedSignalIds.length}
             totalSignalsCount={scenario.signals.length}
             simulationScore={simulationScore}
-            onRetry={handleStartMission}
+            onRetry={handleCycleScenario}
             onContinueToExplanation={handleContinueToExplanation}
             onDismissWrongSelection={handleDismissWrong}
             reducedMotion={reducedMotion}
@@ -231,7 +287,7 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
 
       {/* 4. POST-GAME PYRAVEX ARCHITECTURAL EXPLANATION */}
       {status === 'COMPLETE' && (
-        <PyravexExplanation onPlayAgain={handleStartMission} reducedMotion={reducedMotion} />
+        <PyravexExplanation onPlayAgain={handleCycleScenario} reducedMotion={reducedMotion} />
       )}
     </div>
   );

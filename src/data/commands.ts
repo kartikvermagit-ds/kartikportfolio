@@ -14,7 +14,10 @@ import {
   Cpu,
   Trophy,
   Binary,
-  Globe
+  Globe,
+  FileCheck,
+  Clock,
+  Network
 } from 'lucide-react';
 import {
   GithubIcon,
@@ -400,6 +403,92 @@ export function getCommandRegistry(callbacks: {
       action: () => {
         closeOS();
         navigateTo('pyravex-mission');
+      }
+    },
+    {
+      id: 'exp-veridexa-mission',
+      title: 'VERIDEXA: Verify the Document (Intelligence Game)',
+      category: 'EXPLORER',
+      description: 'Interactive document intelligence console to extract candidate specifications, audit lab evidence, and isolate conflicts',
+      keywords: ['veridexa', 'verify', 'document', 'intelligence', 'audit', 'pdf', 'specs', 'conflict', 'power', 'game', 'mission'],
+      icon: FileCheck,
+      badge: 'MISSION',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('veridexa-verification');
+      }
+    },
+    {
+      id: 'exp-chronosat-timemachine',
+      title: 'CHRONOSAT: Temporal Time Machine (Satellite Simulation)',
+      category: 'EXPLORER',
+      description: 'Interactive satellite-image temporal interpolation simulation across a 48-hour orbital revisit blindspot',
+      keywords: ['chronosat', 'time machine', 'temporal', 'interpolation', 'satellite', 'bah2026', 'optical flow', 'revisit', 'frames', 'delta'],
+      icon: Clock,
+      badge: 'MISSION',
+      badgeType: 'amber',
+      action: () => {
+        closeOS();
+        navigateTo('chronosat-timemachine');
+      }
+    },
+    {
+      id: 'exp-algorithm-escape',
+      title: 'ALGORITHM ESCAPE: DSA Puzzle Experience',
+      category: 'EXPLORER',
+      description: 'Solve array complement hashing, stack bracket validation, and graph traversal to unlock KARTIK.OS',
+      keywords: ['algorithm escape', 'dsa', 'solve puzzle', 'coding', 'escape', 'puzzle', 'two sum', 'stack', 'graph', 'kartik.os'],
+      icon: Terminal,
+      badge: 'PUZZLE',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('algorithm-escape');
+      }
+    },
+    {
+      id: 'exp-code-reactor',
+      title: 'Open Code Reactor (Interactive Coding & Debugging)',
+      category: 'EXPLORER',
+      description: 'Futuristic developer workstation to debug code, evaluate ASTs, and reason through algorithmic decisions',
+      keywords: ['code reactor', 'code', 'reactor', 'debug', 'execute', 'programming', 'reasoning', 'c++', 'ast', 'precedence'],
+      icon: Cpu,
+      badge: 'REACTOR',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('code-reactor');
+      }
+    },
+    {
+      id: 'exp-system-builder',
+      title: 'Open System Builder (Interactive Architecture Workbench)',
+      category: 'EXPLORER',
+      description: 'Design end-to-end software and AI system architectures across six tiers from data to UI',
+      keywords: ['system builder', 'system', 'architecture', 'builder', 'design', 'pipeline', 'fastapi', 'backend', 'fullstack'],
+      shortcut: 'S',
+      icon: Network,
+      badge: 'SYSTEM',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('system-builder');
+      }
+    },
+    {
+      id: 'exp-tech-stack-detective',
+      title: 'Open Tech Stack Detective (Stack Trace)',
+      category: 'EXPLORER',
+      description: 'Investigate verified architectural clues and identify the technology stack behind real systems',
+      keywords: ['stack', 'tech', 'technology', 'detective', 'stack trace', 'clues', 'fastapi', 'leaflet', 'investigate', 'guessing game'],
+      shortcut: 'T',
+      icon: Search,
+      badge: 'DETECTIVE',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('tech-stack-detective');
       }
     },
 

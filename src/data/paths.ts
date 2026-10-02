@@ -33,10 +33,10 @@ export const EXPLORATION_PATHS: PathItem[] = [
     iconName: 'Gamepad2',
     steps: [
       { label: '3D WORLD', targetId: 'work', description: 'Interactive WebGL simulations & shaders' },
-      { label: 'PLAYGROUND', targetId: 'capabilities', description: 'Interactive 3D capability cards' },
-      { label: 'SIMULATIONS', targetId: 'pyravex-mission', description: 'PYRAVEX satellite anomaly detection game' },
-      { label: 'EXPERIMENTS', targetId: 'chronosat', description: 'ChronoSat temporal interpolation' },
-      { label: 'EASTER EGGS', targetId: 'hero', description: 'Kartik OS terminal triggers & hidden commands' }
+      { label: 'PYRAVEX', targetId: 'pyravex-mission', description: 'PYRAVEX satellite anomaly detection game' },
+      { label: 'VERIDEXA', targetId: 'veridexa-verification', description: 'Veridexa document verification intelligence game' },
+      { label: 'CHRONOSAT', targetId: 'chronosat-timemachine', description: 'ChronoSat temporal interpolation time machine' },
+      { label: 'ALGO ESCAPE', targetId: 'algorithm-escape', description: 'Interactive DSA problem-solving escape puzzle' }
     ]
   },
   {
@@ -45,17 +45,17 @@ export const EXPLORATION_PATHS: PathItem[] = [
     title: 'EXPLORE THE STACK',
     shortTitle: 'STACK',
     description: 'Technologies, architecture, algorithms & engineering.',
-    routeConcept: 'TECHNOLOGY → ARCHITECTURE → CODE → DSA → GITHUB',
+    routeConcept: 'STACK → TECHNOLOGY → DETECTIVE → ARCHITECTURE → CODE REACTOR',
     primaryTargetId: 'stack',
     color: '#8B5CF6', // Purple
     secondaryColor: '#A78BFA',
     iconName: 'Cpu',
     steps: [
       { label: 'TECHNOLOGY', targetId: 'stack', description: 'Constellation matrix of technologies' },
-      { label: 'ARCHITECTURE', targetId: 'capabilities', description: 'System design & verified pipelines' },
-      { label: 'CODE', targetId: 'registry', description: 'TypeScript, Python & C++ implementations' },
-      { label: 'DSA', targetId: 'problem-solving', description: 'Algorithmic graphs & LeetCode/Codeforces' },
-      { label: 'GITHUB', targetId: 'github', description: 'Language distribution & commit activity' }
+      { label: 'DETECTIVE', targetId: 'tech-stack-detective', description: 'Tech Stack Detective interactive architectural clues' },
+      { label: 'ARCHITECTURE', targetId: 'system-builder', description: 'Interactive architecture canvas & data flow simulation' },
+      { label: 'CODE REACTOR', targetId: 'code-reactor', description: 'Interactive Code Reactor & algorithmic reasoning' },
+      { label: 'DSA', targetId: 'algorithm-escape', description: 'Interactive algorithm escape puzzle & coding profiles' }
     ]
   },
   {

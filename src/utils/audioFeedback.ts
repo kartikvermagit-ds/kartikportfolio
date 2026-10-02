@@ -19,7 +19,9 @@ function getAudioContext(): AudioContext | null {
   }
 }
 
-export function playPathFeedback(type: 'hover' | 'select' | 'tick') {
+export function playPathFeedback(
+  type: 'hover' | 'select' | 'tick' | 'correct' | 'error' | 'complete'
+) {
   if (typeof window === 'undefined') return;
 
   // Respect user sound preference
@@ -65,6 +67,33 @@ export function playPathFeedback(type: 'hover' | 'select' | 'tick') {
       gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
       osc.start(now);
       osc.stop(now + 0.02);
+    } else if (type === 'correct') {
+      // Harmonic verification chime: 587Hz -> 880Hz
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(587.33, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+      gain.gain.setValueAtTime(0.045, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+      osc.start(now);
+      osc.stop(now + 0.22);
+    } else if (type === 'error') {
+      // Soft muffled low-frequency buzz: 220Hz -> 160Hz
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(220, now);
+      osc.frequency.exponentialRampToValueAtTime(160, now + 0.12);
+      gain.gain.setValueAtTime(0.025, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.14);
+      osc.start(now);
+      osc.stop(now + 0.14);
+    } else if (type === 'complete') {
+      // Investigation finale triple chord resonance
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(440, now);
+      osc.frequency.exponentialRampToValueAtTime(880, now + 0.35);
+      gain.gain.setValueAtTime(0.05, now);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+      osc.start(now);
+      osc.stop(now + 0.45);
     }
   } catch {
     // Ignore audio failures

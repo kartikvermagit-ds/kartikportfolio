@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { GithubIcon, LeetCodeIcon, CodeforcesIcon, HackerRankIcon } from '../common/Icons';
 import { SectionHeading } from '../common/SectionHeading';
 import { CODING_PLATFORMS } from '../../data/profiles';
@@ -75,6 +75,30 @@ export function CodingJourneySection() {
         <div className="lg:col-span-6 h-[460px] rounded-3xl bg-[#080D16] border border-slate-800/90 shadow-2xl relative overflow-hidden flex flex-col justify-between">
           <AlgoGraphScene />
         </div>
+      </div>
+
+      {/* Task 7: Algorithm Escape Callout Banner */}
+      <div className="mt-8 p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-blue-950/40 via-purple-950/30 to-indigo-950/40 border border-blue-500/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="space-y-1 text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-start gap-2 text-xs font-mono text-blue-400 font-bold">
+            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
+            <span>PLAYABLE DSA CHALLENGE</span>
+          </div>
+          <h4 className="text-base sm:text-lg font-bold text-white">
+            ALGORITHM ESCAPE: Can you solve the system?
+          </h4>
+          <p className="text-xs text-slate-300 font-sans max-w-xl">
+            Test your algorithmic intuition against 3 core computer science puzzles: Two-Sum complement search, stack bracket validation, and graph network traversal.
+          </p>
+        </div>
+
+        <a
+          href="#algorithm-escape"
+          className="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold tracking-wider flex items-center gap-2 shadow-lg shadow-blue-600/30 whitespace-nowrap transition-all"
+        >
+          <span>ENTER ALGORITHM ESCAPE</span>
+          <ArrowRight className="w-4 h-4" />
+        </a>
       </div>
     </section>
   );

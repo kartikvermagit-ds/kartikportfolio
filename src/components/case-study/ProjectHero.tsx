@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Activity, ArrowRight, Gamepad2 } from 'lucide-react';
+import { ExternalLink, Activity, ArrowRight, Gamepad2, FileCheck, Clock } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { MagneticButton } from '../common/MagneticButton';
 import { PyravexGlobeScene } from '../3d/PyravexGlobeScene';
@@ -134,6 +134,24 @@ export function ProjectHero({ project, reducedMotion = false }: ProjectHeroProps
               <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-200 border border-amber-400/40 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md">
                 <Gamepad2 className="w-3.5 h-3.5 text-amber-400" />
                 <span>PLAY MISSION GAME</span>
+              </div>
+            </MagneticButton>
+          )}
+
+          {project.id === 'veridexa' && (
+            <MagneticButton href="#veridexa-verification" cursorType="project">
+              <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-purple-500/20 to-indigo-500/20 hover:from-purple-500/30 hover:to-indigo-500/30 text-purple-200 border border-purple-400/40 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md">
+                <FileCheck className="w-3.5 h-3.5 text-purple-400" />
+                <span>VERIFY DOCUMENT SIMULATION</span>
+              </div>
+            </MagneticButton>
+          )}
+
+          {project.id === 'chronosat' && (
+            <MagneticButton href="#chronosat-timemachine" cursorType="project">
+              <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-pink-500/20 to-purple-500/20 hover:from-pink-500/30 hover:to-purple-500/30 text-pink-200 border border-pink-400/40 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md">
+                <Clock className="w-3.5 h-3.5 text-pink-400" />
+                <span>EXPERIENCE TEMPORAL TIME MACHINE</span>
               </div>
             </MagneticButton>
           )}
