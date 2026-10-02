@@ -388,6 +388,20 @@ export function getCommandRegistry(callbacks: {
         navigateTo('pyravex');
       }
     },
+    {
+      id: 'exp-pyravex-mission',
+      title: 'PYRAVEX: Find the Anomaly (Satellite Game)',
+      category: 'EXPLORER',
+      description: 'Interactive satellite intelligence console to analyze thermal signals and isolate anomalies',
+      keywords: ['pyravex', 'anomaly', 'find anomaly', 'play pyravex', 'satellite', 'mission', 'game', 'thermal', 'investigate'],
+      icon: Globe,
+      badge: 'MISSION',
+      badgeType: 'amber',
+      action: () => {
+        closeOS();
+        navigateTo('pyravex-mission');
+      }
+    },
 
     // ==========================================
     // 4. ENGINEERING & PROFILES

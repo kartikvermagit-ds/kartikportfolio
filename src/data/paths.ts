@@ -34,8 +34,8 @@ export const EXPLORATION_PATHS: PathItem[] = [
     steps: [
       { label: '3D WORLD', targetId: 'work', description: 'Interactive WebGL simulations & shaders' },
       { label: 'PLAYGROUND', targetId: 'capabilities', description: 'Interactive 3D capability cards' },
-      { label: 'SIMULATIONS', targetId: 'chronosat', description: 'ChronoSat temporal interpolation' },
-      { label: 'EXPERIMENTS', targetId: 'registry', description: 'Standalone interactive utilities' },
+      { label: 'SIMULATIONS', targetId: 'pyravex-mission', description: 'PYRAVEX satellite anomaly detection game' },
+      { label: 'EXPERIMENTS', targetId: 'chronosat', description: 'ChronoSat temporal interpolation' },
       { label: 'EASTER EGGS', targetId: 'hero', description: 'Kartik OS terminal triggers & hidden commands' }
     ]
   },

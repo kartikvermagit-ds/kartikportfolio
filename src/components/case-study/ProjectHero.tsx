@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Activity, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ExternalLink, Activity, ArrowRight, Gamepad2 } from 'lucide-react';
 import { GithubIcon } from '../common/Icons';
 import { MagneticButton } from '../common/MagneticButton';
 import { PyravexGlobeScene } from '../3d/PyravexGlobeScene';
@@ -125,6 +125,15 @@ export function ProjectHero({ project, reducedMotion = false }: ProjectHeroProps
               <div className="px-4 py-2.5 rounded-full bg-[#080D16]/80 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800 font-mono text-xs flex items-center gap-1.5 transition-all">
                 <Activity className="w-3.5 h-3.5 text-emerald-400" />
                 <span>API TELEMETRY</span>
+              </div>
+            </MagneticButton>
+          )}
+
+          {project.id === 'pyravex' && (
+            <MagneticButton href="#pyravex-mission" cursorType="project">
+              <div className="px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500/20 to-orange-500/20 hover:from-amber-500/30 hover:to-orange-500/30 text-amber-200 border border-amber-400/40 font-mono text-xs font-bold flex items-center gap-1.5 transition-all shadow-md">
+                <Gamepad2 className="w-3.5 h-3.5 text-amber-400" />
+                <span>PLAY MISSION GAME</span>
               </div>
             </MagneticButton>
           )}

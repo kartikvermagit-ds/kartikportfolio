@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, CheckCircle2, ArrowRight, ShieldCheck, Cpu } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
 import { ProjectHero } from './ProjectHero';
 import { ProjectInteractiveWorld } from './ProjectInteractiveWorld';
 import { ProjectArchitecture } from './ProjectArchitecture';
@@ -21,7 +21,6 @@ export function CaseStudyView({
   onSelectNextProject,
   reducedMotion = false
 }: CaseStudyViewProps) {
-  const accent = project.domainTheme.accentColor;
 
   const handleNextClick = () => {
     playPathFeedback('select');

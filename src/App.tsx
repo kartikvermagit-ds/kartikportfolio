@@ -12,6 +12,7 @@ import { AboutSection } from './components/sections/AboutSection';
 import { WhatIBuildSection } from './components/sections/WhatIBuildSection';
 import { TechUniverseSection } from './components/sections/TechUniverseSection';
 import { FlagshipProjectsSection } from './components/sections/FlagshipProjectsSection';
+import { PyravexMissionSection } from './components/sections/PyravexMissionSection';
 import { ProjectExplorerSection } from './components/sections/ProjectExplorerSection';
 import { GitHubLiveSection } from './components/sections/GitHubLiveSection';
 import { HackathonJourneySection } from './components/sections/HackathonJourneySection';
@@ -119,6 +120,9 @@ export function App() {
 
         {/* 6. Flagship Projects Showcase (PYRAVEX, VERIDEXA, NUDGEKAVACH, CHRONOSAT, HOSTELHUB) */}
         <FlagshipProjectsSection />
+
+        {/* TASK 4: Pyravex Satellite Intelligence Mission Game */}
+        <PyravexMissionSection />
 
         {/* 7. Secondary Projects Explorer (Searchable Registry) */}
         <ProjectExplorerSection repos={repos} />

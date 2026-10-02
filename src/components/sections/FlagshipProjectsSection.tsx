@@ -7,7 +7,7 @@ import type { ProjectCaseStudy } from '../../types/caseStudy';
 
 export function FlagshipProjectsSection() {
   const [activeProjectId, setActiveProjectId] = useState<string>(CASE_STUDIES[0].id);
-  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
+  const [reducedMotion] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       return (
         window.matchMedia('(prefers-reduced-motion: reduce)').matches ||

@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Layers, CheckCircle2, Sparkles, Terminal } from 'lucide-react';
 import type { ProjectCaseStudy, TechEcosystemItem } from '../../types/caseStudy';
 import { playPathFeedback } from '../../utils/audioFeedback';
 

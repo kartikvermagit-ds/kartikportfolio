@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Cpu, Server, Database, Globe, Shield, Terminal, ArrowRight } from 'lucide-react';
-import type { ProjectCaseStudy, ArchitectureNode } from '../../types/caseStudy';
+import { Server, Database, Globe, Shield, Terminal, ArrowRight } from 'lucide-react';
+import type { ProjectCaseStudy } from '../../types/caseStudy';
 import { playPathFeedback } from '../../utils/audioFeedback';
 
 interface ProjectArchitectureProps {
@@ -12,13 +11,13 @@ interface ProjectArchitectureProps {
 const CATEGORY_ICONS = {
   CLIENT: Globe,
   API: Server,
-  PIPELINE: Cpu,
+  PIPELINE: Terminal,
   DATA: Terminal,
   STORAGE: Database,
   SECURITY: Shield
 };
 
-export function ProjectArchitecture({ project, reducedMotion = false }: ProjectArchitectureProps) {
+export function ProjectArchitecture({ project, reducedMotion: _reducedMotion = false }: ProjectArchitectureProps) {
   const [selectedNodeId, setSelectedNodeId] = useState<string>(project.architectureNodes[0]?.id || '');
   const nodes = project.architectureNodes;
   const activeNode = nodes.find((n) => n.id === selectedNodeId) || nodes[0];
@@ -56,7 +55,7 @@ export function ProjectArchitecture({ project, reducedMotion = false }: ProjectA
 
       {/* Horizontal Flow Graph */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 mb-6">
-        {nodes.map((node, idx) => {
+        {nodes.map((node) => {
           const Icon = CATEGORY_ICONS[node.category] || Server;
           const isSelected = node.id === activeNode.id;
           const isConnected = activeNode.connectedTo?.includes(node.id) || false;
