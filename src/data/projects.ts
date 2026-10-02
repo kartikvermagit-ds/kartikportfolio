@@ -1,107 +1,122 @@
-import { Project } from '../types';
+import type { Project } from '../types';
 
 export const FLAGSHIP_PROJECTS: Project[] = [
   {
     id: 'pyravex',
     number: '01',
     title: 'PYRAVEX',
-    subtitle: 'AI-Powered Satellite Thermal Intelligence',
-    tagline: 'Geospatial Incident Monitoring & Automated Threat Assessment',
-    description:
-      'An AI-powered satellite thermal intelligence and incident monitoring platform combining satellite fire data, geospatial analysis, historical thermal behavior, and automated threat assessment.',
+    subtitle: 'Satellite Thermal Intelligence',
+    positioning: 'Satellite thermal anomaly ingestion, geospatial clustering, and incident monitoring.',
+    problem:
+      'Wildfires and industrial thermal anomalies occur unpredictably across broad geographic expanses, while raw satellite telemetry is noisy, delayed, and difficult to correlate with atmospheric variables.',
+    whatIBuilt:
+      'Engineered an automated ingestion pipeline that polls NASA FIRMS thermal anomaly feeds, clusters localized hot spots using geospatial coordinates, correlates them with atmospheric wind/humidity from Open-Meteo, and plots incident telemetry across an interactive Leaflet map interface.',
+    keySystems: [
+      'NASA FIRMS Thermal Telemetry Ingestion',
+      'Geospatial Proximity Hotspot Clustering',
+      'Open-Meteo Atmospheric Vector Correlation',
+      'Interactive Command Map with Historical Replay'
+    ],
     technologies: [
       'React',
       'TypeScript',
       'FastAPI',
       'Python',
       'Leaflet',
-      'NASA FIRMS',
-      'Open-Meteo',
-      'AI',
-      'Geospatial Data'
+      'NASA FIRMS API',
+      'Open-Meteo'
+    ],
+    technicalFacts: [
+      { label: 'Data Sources', value: 'NASA FIRMS (MODIS / VIIRS)' },
+      { label: 'Geospatial', value: 'Leaflet / OpenStreetMap' },
+      { label: 'Weather Telemetry', value: 'Open-Meteo REST API' },
+      { label: 'API & Processing', value: 'Python / FastAPI Async' }
     ],
     githubUrl: 'https://github.com/kartikvermagit-ds/PYRAVEX-2',
     liveUrl: 'https://pyravex-2.vercel.app/',
     backendUrl: 'https://pyravex-backend.onrender.com/',
-    visualType: 'satellite',
-    highlights: [
-      'Real-time ingestion of NASA FIRMS thermal anomaly feeds',
-      'Automated hotspot clustering & regional danger scoring',
-      'Integrated Open-Meteo atmospheric wind & moisture telemetry',
-      'Interactive geospatial command console with historical replay'
-    ],
-    metrics: [
-      { label: 'Latency', value: '<250ms' },
-      { label: 'Data Feeds', value: 'NASA FIRMS' },
-      { label: 'Coverage', value: 'National' }
-    ]
+    visualType: 'satellite'
   },
   {
     id: 'veridexa',
     number: '02',
     title: 'VERIDEXA',
-    subtitle: 'AI-Powered Product Intelligence',
-    tagline: 'Unstructured Industrial Specification Verification & Grounding',
-    description:
-      'Transforms unstructured industrial product information into validated, grounded, and explainable product intelligence. Eliminates hallucinations via strict multi-step evidence extraction.',
+    subtitle: 'Industrial Specification Grounding',
+    positioning: 'Transforms unstructured industrial product spec sheets into grounded, verifiable intelligence.',
+    problem:
+      'Complex technical datasheets and enterprise component catalogues contain conflicting specifications, unnormalized units, and unstructured tables where standard LLM extraction frequently hallucinates values.',
+    whatIBuilt:
+      'Designed a multi-stage document intelligence pipeline that parses raw technical PDFs, extracts candidate schema fields, applies deterministic range and unit validation, performs cross-field conflict checks, and produces explainable evidence citations linking values back to source document coordinates.',
+    keySystems: [
+      'Multi-Format Document Parsing & Layout Analysis',
+      'Deterministic Unit Normalization & Conflict Checks',
+      'Schema-Constrained LLM Extraction',
+      'Audit Verification Workbench with Coordinate Citations'
+    ],
     technologies: [
       'React',
       'TypeScript',
       'FastAPI',
       'Python',
       'SQLAlchemy',
-      'AI / LLM'
+      'LLM Workflows'
+    ],
+    technicalFacts: [
+      { label: 'Document Ingest', value: 'PDF Table & Text Extraction' },
+      { label: 'Validation Engine', value: 'Rule-Based Conflict Detection' },
+      { label: 'Reasoning Mode', value: 'Schema-Constrained LLM Prompts' },
+      { label: 'Audit Trail', value: 'Source Page & Coordinate Citations' }
     ],
     githubUrl: 'https://github.com/kartikvermagit-ds/Veridexa',
-    visualType: 'pipeline',
-    highlights: [
-      'High-precision PDF parsing & schema-mapped token extraction',
-      'Deterministic conflict detection across engineering specifications',
-      'Explainable confidence scoring for verified attributes',
-      'Human-in-the-loop audit review workbench'
-    ],
-    metrics: [
-      { label: 'Audit Trail', value: '100% Grounded' },
-      { label: 'Pipeline Stages', value: '6 Phases' },
-      { label: 'Verification', value: 'Deterministic' }
-    ]
+    visualType: 'pipeline'
   },
   {
     id: 'nudgekavach',
     number: '03',
     title: 'NUDGEKAVACH',
-    subtitle: 'Evidence-First Interface Manipulation Auditing',
-    tagline: 'Capturing Observable UI Manipulation Signals & Preserving Audit Trails',
-    description:
-      'A browser and desktop auditing system designed to capture observable interface manipulation signals and preserve the evidence trail. Empowers users to inspect deceptive UI patterns in real time.',
+    subtitle: 'Interface Manipulation Auditing',
+    positioning: 'Evidence-first browser and desktop auditing system capturing observable interface manipulation signals.',
+    problem:
+      'Dark patterns and deceptive UI tricks (false countdown timers, sneak-into-basket tactics, masked recurring consent) are ephemeral and vanish upon page reload, leaving consumers without verifiable evidence.',
+    whatIBuilt:
+      'Constructed a client-side auditing tool via a Chrome Extension and an Electron desktop app that observes DOM mutations in real time, flags anomalous UI timing scripts (such as timer resets), captures viewport diff snapshots, and creates a local, tamper-evident SHA-256 evidence trail without cloud leakage.',
+    keySystems: [
+      'Passive MutationObserver DOM Signal Detection',
+      'Observable Behavioral Pattern Classification',
+      'Deterministic Local SHA-256 Hash Generation',
+      'Cross-Platform Electron Audit Management Suite'
+    ],
     technologies: [
       'JavaScript',
-      'Browser Extension',
+      'Browser Extension API',
       'Electron',
       'Node.js'
     ],
-    githubUrl: 'https://github.com/kartikvermagit-ds/NudgeKavach',
-    visualType: 'auditor',
-    highlights: [
-      'Real-time DOM mutation monitoring for hidden timers & artificial urgency',
-      'Visual DOM diff capture preserving exact viewport screenshots',
-      'Tamper-evident localized evidence logging',
-      'Cross-platform desktop dashboard powered by Electron'
+    technicalFacts: [
+      { label: 'Observation Layer', value: 'Browser DOM Mutation Observer' },
+      { label: 'Evidence Engine', value: 'Local SHA-256 Checksums' },
+      { label: 'Target Scope', value: 'Observable UI Script Mutations' },
+      { label: 'Privacy Model', value: '100% Local Device Storage' }
     ],
-    metrics: [
-      { label: 'Capture Mode', value: 'Real-Time' },
-      { label: 'Footprint', value: 'Zero Cloud Leak' },
-      { label: 'Scope', value: 'DOM & UI' }
-    ]
+    githubUrl: 'https://github.com/kartikvermagit-ds/NudgeKavach',
+    visualType: 'auditor'
   },
   {
     id: 'chronosat',
     number: '04',
     title: 'CHRONOSAT',
-    subtitle: 'Satellite Image Temporal Resolution Enhancement',
-    tagline: 'Frame Interpolation Developed for Bharatiya Antariksh Hackathon 2026',
-    description:
-      'AI/ML-based satellite image frame interpolation project developed for Bharatiya Antariksh Hackathon 2026. Synthesizes high-fidelity intermediate frames across sparse temporal satellite passes.',
+    subtitle: 'Temporal Resolution Enhancement',
+    positioning: 'Satellite image frame interpolation developed for Bharatiya Antariksh Hackathon 2026.',
+    problem:
+      'Earth observation satellites have fixed revisit schedules (often 24 to 72 hours), leaving critical temporal observation blindspots during rapid disaster progressions or weather events.',
+    whatIBuilt:
+      'Engineered an optical flow and deep learning frame interpolation pipeline for Bharatiya Antariksh Hackathon 2026 that models motion trajectories across consecutive spectral passes and synthesizes intermediate satellite frames to fill temporal observation gaps.',
+    keySystems: [
+      'Multi-Band Optical Flow Vector Calculation',
+      'Deep Neural Intermediate Frame Generation',
+      'Spectral Band Alignment & Edge Preservation',
+      'Split-Screen Temporal Frame Scrubber UI'
+    ],
     technologies: [
       'Python',
       'FastAPI',
@@ -110,28 +125,31 @@ export const FLAGSHIP_PROJECTS: Project[] = [
       'Optical Flow',
       'Deep Learning'
     ],
-    githubUrl: 'https://github.com/kartikvermagit-ds/ChronoSat-BAH2026',
-    visualType: 'interpolation',
-    highlights: [
-      'Temporal frame interpolation synthesizing missing earth observation passes',
-      'Optical flow motion vector calculation across spectral channels',
-      'Deep learning texture refinement to preserve coastline & cloud fidelity',
-      'Interactive timeline comparison slider with split-screen visualizer'
+    technicalFacts: [
+      { label: 'Challenge Track', value: 'Bharatiya Antariksh Hackathon 2026' },
+      { label: 'Algorithmic Core', value: 'Optical Flow Motion Vectors' },
+      { label: 'Target Domain', value: 'Temporal Satellite Revisit Expansion' },
+      { label: 'Interface', value: 'Interactive Frame Comparison Slider' }
     ],
-    metrics: [
-      { label: 'Hackathon', value: 'BAH 2026' },
-      { label: 'Model Core', value: 'Optical Flow + DL' },
-      { label: 'Domain', value: 'Earth Observation' }
-    ]
+    githubUrl: 'https://github.com/kartikvermagit-ds/ChronoSat-BAH2026',
+    visualType: 'interpolation'
   },
   {
     id: 'hostelhub',
     number: '05',
     title: 'HOSTELHUB',
-    subtitle: 'Academic Resource Sharing Platform',
-    tagline: 'Collaborative Notes & CT Knowledge Distribution for Campus Students',
-    description:
-      'A full-stack platform for hostel students to discover, upload, bookmark, and organize academic resources, course material, class test archives, and exam preparation notes.',
+    subtitle: 'Academic Resource Distribution',
+    positioning: 'Full-stack collaborative notes, Class Test (CT) archives, and academic resource platform for students.',
+    problem:
+      'Crucial study material, past semester Class Test (CT) question sets, and handwritten faculty notes are scattered across ephemeral chat groups and lost during exams.',
+    whatIBuilt:
+      'Developed a centralized full-stack resource management platform with dedicated subject repositories, structured CT exam archives, authenticated file uploads via Supabase storage, and peer study discussions.',
+    keySystems: [
+      'Subject-Organized Class Test (CT) Repository',
+      'Relational Supabase PostgreSQL Storage Schema',
+      'Role-Protected File Ingestion & PDF Previewer',
+      'Real-Time Campus Announcement Channels'
+    ],
     technologies: [
       'React',
       'Tailwind CSS',
@@ -140,18 +158,13 @@ export const FLAGSHIP_PROJECTS: Project[] = [
       'Supabase',
       'PostgreSQL'
     ],
-    githubUrl: 'https://github.com/kartikvermagit-ds/HostelHub',
-    visualType: 'campus',
-    highlights: [
-      'Dedicated Class Test (CT) Zone with structured subject repositories',
-      'Instant bookmarking, search filters, and fast PDF preview',
-      'Community discussion threads and peer study announcements',
-      'Row-level secured Supabase storage and PostgreSQL schema'
+    technicalFacts: [
+      { label: 'Backend Database', value: 'Supabase Managed PostgreSQL' },
+      { label: 'Access Control', value: 'Row-Level Security (RLS)' },
+      { label: 'File Handling', value: 'Cloud Bucket Storage & Stream Preview' },
+      { label: 'Architecture', value: 'Modular React + RESTful Endpoints' }
     ],
-    metrics: [
-      { label: 'Stack', value: 'React + Supabase' },
-      { label: 'Data Model', value: 'Relational SQL' },
-      { label: 'Focus', value: 'Campus Utility' }
-    ]
+    githubUrl: 'https://github.com/kartikvermagit-ds/HostelHub',
+    visualType: 'campus'
   }
 ];

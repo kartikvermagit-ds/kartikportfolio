@@ -1,4 +1,4 @@
-import { CodingPlatform } from '../types';
+import type { CodingPlatform } from '../types';
 
 export const SOCIAL_LINKS = {
   name: 'Kartik Verma',
@@ -6,7 +6,7 @@ export const SOCIAL_LINKS = {
   college: 'PSIT Kanpur',
   degree: 'B.Tech Computer Science & Engineering — Data Science',
   location: 'Kanpur, Uttar Pradesh, India',
-  email: 'mailto:kartikverma.ds@gmail.com',
+  email: 'mailto:kv5612872@gmail.com',
   github: 'https://github.com/kartikvermagit-ds',
   linkedin: 'https://www.linkedin.com/in/kartik-verma-ds/',
   leetcode: 'https://leetcode.com/u/kartik-verma_29/',
@@ -20,59 +20,55 @@ export const CODING_PLATFORMS: CodingPlatform[] = [
     handle: 'kartikvermagit-ds',
     url: 'https://github.com/kartikvermagit-ds',
     iconName: 'Github',
-    badge: '37+ Repositories',
-    description: 'Primary public source code host, open-source work, full-stack apps, and hackathon project codebases.'
+    description: 'Public source code, project repositories, full-stack systems, and hackathon build codebases.'
   },
   {
     name: 'LeetCode',
     handle: 'kartik-verma_29',
     url: 'https://leetcode.com/u/kartik-verma_29/',
     iconName: 'Code',
-    badge: 'Active Problem Solver',
-    description: 'Algorithmic practice focusing on data structures, dynamic programming, trees, graphs, and two-pointer techniques.'
+    description: 'Algorithmic practice and data structures implementation across arrays, trees, graphs, and dynamic programming.'
   },
   {
     name: 'Codeforces',
     handle: 'kv5612872',
     url: 'https://codeforces.com/profile/kv5612872',
     iconName: 'Terminal',
-    badge: 'Contest Participant',
-    description: 'Competitive programming rounds, fast-paced mathematical thinking, and time-constrained problem resolution.'
+    description: 'Competitive programming rounds and fast mathematical problem resolution under time constraints.'
   },
   {
     name: 'HackerRank',
     handle: 'kv5612872',
     url: 'https://www.hackerrank.com/profile/kv5612872',
     iconName: 'Award',
-    badge: 'Certified & Challenges',
-    description: 'Language proficiency assessments, 24-hr build challenges (Orchestrate), and core algorithm evaluations.'
+    description: 'Problem solving challenges, language evaluation exercises, and 24-hour hackathon build sprints.'
   }
 ];
 
 export const CURRENTLY_BUILDING = [
   {
-    topic: 'AI-Powered Applications',
+    topic: 'AI-POWERED APPLICATIONS',
     status: 'ACTIVE',
-    detail: 'Grounded intelligence pipelines, LLM verification agents, and agentic tools.'
+    detail: 'Grounded intelligence pipelines, LLM verification agents, and structured document parsing.'
   },
   {
-    topic: 'Data Science & Geospatial',
+    topic: 'DATA SCIENCE & GEOSPATIAL',
     status: 'ACTIVE',
-    detail: 'Thermal anomaly detection, atmospheric correlation, and earth observation models.'
+    detail: 'Satellite thermal anomaly clustering, atmospheric correlation, and geospatial coordinate mapping.'
   },
   {
-    topic: 'Full-Stack Distributed Systems',
+    topic: 'FULL-STACK SYSTEMS',
     status: 'DEVELOPING',
-    detail: 'FastAPI backends with reactive frontends, asynchronous queues, and PostgreSQL.'
+    detail: 'FastAPI asynchronous backends paired with modular React interfaces and Supabase PostgreSQL.'
   },
   {
-    topic: 'DSA & Competitive Programming',
+    topic: 'DSA & COMPETITIVE PROGRAMMING',
     status: 'CONTINUOUS',
-    detail: 'Algorithmic pattern refinement across graphs, dynamic programming, and binary trees.'
+    detail: 'Algorithmic pattern refinement across graphs, dynamic programming tables, and binary trees.'
   },
   {
-    topic: 'Hackathon Prototypes',
+    topic: 'EXPERIMENTAL BUILDS',
     status: 'EXPLORING',
-    detail: 'Rapid prototype iteration, zero-to-one problem validation under competition constraints.'
+    detail: 'Offline Windows productivity tools, desktop Electron auditing systems, and rapid prototype validation.'
   }
 ];

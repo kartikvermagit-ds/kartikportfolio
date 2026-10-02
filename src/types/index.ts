@@ -3,25 +3,33 @@ export interface Project {
   number: string;
   title: string;
   subtitle: string;
-  tagline: string;
-  description: string;
+  positioning: string;
+  problem: string;
+  whatIBuilt: string;
+  keySystems: string[];
   technologies: string[];
+  technicalFacts: { label: string; value: string }[];
   githubUrl: string;
   liveUrl?: string;
   backendUrl?: string;
   visualType: 'satellite' | 'pipeline' | 'auditor' | 'interpolation' | 'campus';
-  highlights: string[];
-  metrics?: { label: string; value: string }[];
 }
 
 export interface TechNode {
   id: string;
   name: string;
-  category: 'LANGUAGES' | 'FRONTEND' | 'BACKEND' | 'DATA / CLOUD' | 'AI' | 'TOOLS';
+  category: 'LANGUAGES' | 'FRONTEND' | 'BACKEND' | 'DATA' | 'AI' | 'GEOSPATIAL' | 'TOOLS';
   level: string;
   description: string;
   relatedProjects: string[];
   color: string;
+}
+
+export interface ProcessStage {
+  step: string;
+  name: string;
+  summary: string;
+  detail: string;
 }
 
 export interface HackathonEvent {
@@ -38,7 +46,6 @@ export interface CodingPlatform {
   handle: string;
   url: string;
   iconName: string;
-  badge: string;
   description: string;
 }
 
