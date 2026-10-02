@@ -243,12 +243,26 @@ Portfolio/
    ```bash
    npm run build
    ```
-   Generates optimized assets inside the `dist/` directory.
+   Compiles TypeScript and bundles production assets into `dist/` with vendor code splitting.
 
 5. **Preview production build locally:**
    ```bash
    npm run preview
    ```
+
+---
+
+## 🚀 Deployment to Vercel
+
+The portfolio is pre-configured for zero-friction deployment to [Vercel](https://vercel.com/):
+
+- **Build Command**: `npm run build`
+- **Output Directory**: `dist`
+- **Install Command**: `npm install`
+- **SPA Rewrites**: Included in [`vercel.json`](./vercel.json) for client-side deep links
+- **Environment Variables**: Optional variables documented in [`.env.example`](./.env.example)
+
+Simply connect your GitHub repository to Vercel and import with the Vite preset.
 
 ---
 
