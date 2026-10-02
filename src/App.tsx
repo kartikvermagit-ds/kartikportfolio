@@ -18,6 +18,7 @@ import { CurrentlyBuildingSection } from './components/sections/CurrentlyBuildin
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
 import { BackgroundMusic } from './components/common/BackgroundMusic';
+import { KartikOS } from './components/command/KartikOS';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -32,8 +33,11 @@ export function App() {
       {/* Custom Mouse Cursor with contextual hover states */}
       <CustomCursor />
 
-      {/* Floating Ambient Background Music Controller */}
+      {/* Floating Ambient Background Music Controller (Bottom-Left) */}
       <BackgroundMusic />
+
+      {/* Flagship Command Center: Kartik OS (Bottom-Right Trigger + Cmd/Ctrl+K Palette) */}
+      <KartikOS repos={repos} />
 
       {/* Top Global Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-transparent z-50 pointer-events-none">

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Terminal } from 'lucide-react';
 import { GithubIcon } from './Icons';
 import { SOCIAL_LINKS } from '../../data/profiles';
 
@@ -97,7 +97,21 @@ export function Navbar({ scrollY }: NavbarProps) {
           </div>
 
           {/* Right Action Icons */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2.5">
+            {/* Desktop Quick Trigger for Kartik OS */}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-kartik-os'))}
+              aria-label="Open Kartik OS Command Center (Ctrl+K)"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium text-slate-300 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 hover:border-blue-500/50 rounded-full transition-all group"
+            >
+              <Terminal className="w-3.5 h-3.5 text-blue-400 group-hover:text-blue-300" />
+              <span className="text-[11px] text-slate-300">OS</span>
+              <kbd className="px-1.5 py-0.2 rounded bg-black/60 text-[9px] text-blue-300 border border-slate-700 font-semibold">
+                ⌘K
+              </kbd>
+            </button>
+
             <a
               href={SOCIAL_LINKS.github}
               target="_blank"
@@ -133,6 +147,24 @@ export function Navbar({ scrollY }: NavbarProps) {
             className="md:hidden max-w-[1240px] mx-auto px-4 mt-2 pointer-events-auto"
           >
             <div className="p-5 bg-[#080D16]/95 backdrop-blur-xl border border-slate-800 rounded-2xl shadow-2xl flex flex-col gap-2">
+              {/* Mobile Quick Kartik OS button */}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  window.dispatchEvent(new CustomEvent('open-kartik-os'));
+                }}
+                className="px-3.5 py-2.5 mb-1 text-xs font-mono text-blue-300 bg-blue-950/40 hover:bg-blue-900/40 border border-blue-500/40 rounded-xl transition-colors flex items-center justify-between"
+              >
+                <span className="flex items-center gap-2">
+                  <Terminal className="w-4 h-4 text-blue-400" />
+                  <span className="font-semibold">KARTIK OS // COMMANDS</span>
+                </span>
+                <span className="px-1.5 py-0.5 rounded bg-blue-900/60 border border-blue-500/40 text-[10px] text-blue-300 font-bold">
+                  OPEN
+                </span>
+              </button>
+
               {NAV_LINKS.map((link) => (
                 <a
                   key={link.name}

@@ -43,7 +43,7 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
   const totalForks = useMemo(() => repos.reduce((acc, r) => acc + (r.forks || 0), 0), [repos]);
 
   return (
-    <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative">
+    <section id="github" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative scroll-mt-24">
       <SectionHeading
         number="06"
         tag="LIVE CODE INTELLIGENCE"

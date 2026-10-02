@@ -26,10 +26,34 @@ export function BackgroundMusic() {
     audioRef.current = audio;
 
     // Listen to play/pause events directly on the audio element
-    const onPlay = () => setIsPlaying(true);
-    const onPause = () => setIsPlaying(false);
+    const onPlay = () => {
+      setIsPlaying(true);
+      window.dispatchEvent(new CustomEvent('portfolio-music-change', { detail: { isPlaying: true } }));
+    };
+    const onPause = () => {
+      setIsPlaying(false);
+      window.dispatchEvent(new CustomEvent('portfolio-music-change', { detail: { isPlaying: false } }));
+    };
     audio.addEventListener('play', onPlay);
     audio.addEventListener('pause', onPause);
+
+    // Global toggle event from Kartik OS
+    const handleExternalToggle = () => {
+      if (!audioRef.current) return;
+      if (audioRef.current.paused) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+          setIsMuted(false);
+          try { localStorage.setItem('portfolio_music_muted', 'false'); } catch {}
+        }).catch(() => {});
+      } else {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setIsMuted(true);
+        try { localStorage.setItem('portfolio_music_muted', 'true'); } catch {}
+      }
+    };
+    window.addEventListener('toggle-portfolio-music', handleExternalToggle);
 
     // Browser autoplay policy: attempt playback on the first user interaction
     const handleFirstInteraction = () => {
@@ -55,6 +79,7 @@ export function BackgroundMusic() {
     return () => {
       audio.removeEventListener('play', onPlay);
       audio.removeEventListener('pause', onPause);
+      window.removeEventListener('toggle-portfolio-music', handleExternalToggle);
       audio.pause();
       audio.src = '';
       window.removeEventListener('click', handleFirstInteraction);

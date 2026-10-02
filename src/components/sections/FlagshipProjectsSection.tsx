@@ -45,7 +45,7 @@ export function FlagshipProjectsSection() {
           <div
             key={project.id}
             id={project.id}
-            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[580px] pt-4"
+            className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center min-h-[580px] pt-4 scroll-mt-24"
           >
             {/* Left Column: Standardized Project Dossier */}
             <motion.div
