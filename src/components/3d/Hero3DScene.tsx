@@ -1,13 +1,14 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useInView } from '../../hooks/useInView';
 
 interface SceneProps {
-  mouse: { normalizedX: number; normalizedY: number };
-  scrollY: number;
+  mouse?: { normalizedX: number; normalizedY: number };
+  scrollY?: number;
 }
 
-function IntelligenceCore({ mouse, scrollY }: SceneProps) {
+function IntelligenceCore() {
   const outerSphereRef = useRef<THREE.Mesh>(null!);
   const innerPolyRef = useRef<THREE.Mesh>(null!);
   const orbitGroup1Ref = useRef<THREE.Group>(null!);
@@ -16,10 +17,13 @@ function IntelligenceCore({ mouse, scrollY }: SceneProps) {
 
   useFrame((state) => {
     const time = state.clock.getElapsedTime();
+    const pointerX = state.pointer.x;
+    const pointerY = state.pointer.y;
+    const scrollY = typeof window !== 'undefined' ? window.scrollY : 0;
 
-    // Subtle rotation + gentle parallax
-    const targetRotX = mouse.normalizedY * 0.25 + time * 0.12 + scrollY * 0.0008;
-    const targetRotY = mouse.normalizedX * 0.35 + time * 0.18 + scrollY * 0.001;
+    // Subtle rotation + gentle parallax using direct R3F pointer
+    const targetRotX = pointerY * 0.25 + time * 0.12 + scrollY * 0.0008;
+    const targetRotY = pointerX * 0.35 + time * 0.18 + scrollY * 0.001;
 
     if (outerSphereRef.current) {
       outerSphereRef.current.rotation.x = THREE.MathUtils.lerp(outerSphereRef.current.rotation.x, targetRotX, 0.04);
@@ -36,12 +40,12 @@ function IntelligenceCore({ mouse, scrollY }: SceneProps) {
     // Trajectory orbital rotations
     if (orbitGroup1Ref.current) {
       orbitGroup1Ref.current.rotation.z = time * 0.15;
-      orbitGroup1Ref.current.rotation.x = 1.15 + mouse.normalizedY * 0.1;
+      orbitGroup1Ref.current.rotation.x = 1.15 + pointerY * 0.1;
     }
 
     if (orbitGroup2Ref.current) {
       orbitGroup2Ref.current.rotation.z = -time * 0.12;
-      orbitGroup2Ref.current.rotation.y = 0.8 + mouse.normalizedX * 0.1;
+      orbitGroup2Ref.current.rotation.y = 0.8 + pointerX * 0.1;
     }
 
     // Traveling telemetry packet signal pulse
@@ -184,10 +188,13 @@ function CoordinateGrid() {
   );
 }
 
-export function Hero3DScene({ mouse, scrollY }: SceneProps) {
+export function Hero3DScene({ mouse, scrollY }: SceneProps = {}) {
+  const { ref, isInView } = useInView({ rootMargin: '200px 0px' });
+
   return (
-    <div className="absolute inset-0 pointer-events-none w-full h-full overflow-hidden">
+    <div ref={ref} className="absolute inset-0 pointer-events-none w-full h-full overflow-hidden">
       <Canvas
+        frameloop={isInView ? 'always' : 'never'}
         camera={{ position: [0, 0, 7.5], fov: 48 }}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         dpr={[1, 1.5]}
@@ -198,7 +205,7 @@ export function Hero3DScene({ mouse, scrollY }: SceneProps) {
         <directionalLight position={[0, 8, 4]} intensity={0.5} />
 
         <CoordinateGrid />
-        <IntelligenceCore mouse={mouse} scrollY={scrollY} />
+        <IntelligenceCore />
         <DeepSpaceField />
       </Canvas>
     </div>

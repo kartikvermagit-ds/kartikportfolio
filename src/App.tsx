@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useMousePosition } from './hooks/useMousePosition';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useGitHubData } from './hooks/useGitHubData';
 import { CustomCursor } from './components/common/CustomCursor';
@@ -21,7 +20,6 @@ import { Footer } from './components/sections/Footer';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
-  const mouse = useMousePosition();
   const { scrollProgress, scrollY } = useScrollProgress();
   const { repos, userProfile, isLoading: isGitLoading } = useGitHubData();
 
@@ -47,7 +45,7 @@ export function App() {
       {/* Scrollytelling Sections Flow */}
       <main className="relative z-10 flex flex-col w-full">
         {/* 1. Hero: Enter My World */}
-        <HeroSection mouse={mouse} scrollY={scrollY} />
+        <HeroSection scrollY={scrollY} />
 
         {/* 2. 3D Digital Brain / Systems Transition */}
         <BrainTransitionSection scrollProgress={scrollProgress} />

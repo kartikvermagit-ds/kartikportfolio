@@ -7,17 +7,17 @@ import { MagneticButton } from '../common/MagneticButton';
 import { SOCIAL_LINKS } from '../../data/profiles';
 
 interface HeroSectionProps {
-  mouse: { normalizedX: number; normalizedY: number };
+  mouse?: { normalizedX: number; normalizedY: number };
   scrollY: number;
 }
 
-export function HeroSection({ mouse, scrollY }: HeroSectionProps) {
+export function HeroSection({ scrollY }: HeroSectionProps) {
   const isScrolledPast = scrollY > 260;
 
   return (
     <section className="relative min-h-[92vh] w-full flex flex-col justify-between pt-32 pb-14 px-4 sm:px-6 lg:px-8 overflow-hidden bg-radial-gradient">
       {/* 7-Layer Intelligence Core WebGL Canvas */}
-      <Hero3DScene mouse={mouse} scrollY={scrollY} />
+      <Hero3DScene />
 
       {/* Cyber Grid Subtlety */}
       <div className="absolute inset-0 bg-cyber-grid opacity-50 pointer-events-none" />

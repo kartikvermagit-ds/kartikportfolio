@@ -1,6 +1,7 @@
 import React, { useRef, useMemo, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useInView } from '../../hooks/useInView';
 
 export interface DsaConcept {
   id: string;
@@ -134,15 +135,17 @@ function AlgoNodesMesh({ activeId }: { activeId: string }) {
 }
 
 export function AlgoGraphScene() {
+  const { ref, isInView } = useInView();
   const [activeConcept, setActiveConcept] = useState<DsaConcept>(DSA_CONCEPTS[5]); // Default GRAPHS
 
   return (
-    <div className="w-full h-full min-h-[380px] relative flex flex-col justify-between p-4">
+    <div ref={ref} className="w-full h-full min-h-[380px] relative flex flex-col justify-between p-4">
       {/* 3D WebGL Canvas */}
       <div className="absolute inset-0">
         <Canvas
+          frameloop={isInView ? 'always' : 'never'}
           camera={{ position: [0, 0, 5.5], fov: 46 }}
-          gl={{ antialias: true, alpha: true }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           dpr={[1, 1.5]}
         >
           <ambientLight intensity={0.5} />

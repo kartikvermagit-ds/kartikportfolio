@@ -135,12 +135,17 @@ function SatelliteCommandGlobe() {
   );
 }
 
+import { useInView } from '../../hooks/useInView';
+
 export function PyravexGlobeScene() {
+  const { ref, isInView } = useInView();
+
   return (
-    <div className="w-full h-full min-h-[380px] relative">
+    <div ref={ref} className="w-full h-full min-h-[380px] relative">
       <Canvas
+        frameloop={isInView ? 'always' : 'never'}
         camera={{ position: [0, 1.2, 5.0], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         dpr={[1, 1.5]}
       >
         <ambientLight intensity={0.6} />

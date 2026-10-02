@@ -23,6 +23,9 @@
     background-color: var(--bg-base);
     color: var(--text-primary);
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   body {
@@ -31,6 +34,10 @@
     background-color: var(--bg-base);
     color: var(--text-primary);
     overflow-x: hidden;
+  }
+
+  canvas {
+    touch-action: pan-y;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -102,6 +109,19 @@
 
 .preserve-3d {
   transform-style: preserve-3d;
+}
+
+/* GPU hardware acceleration helpers */
+.gpu-accelerated {
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  will-change: transform;
+}
+
+/* Off-screen layout skipping for ultra-fast 120Hz/144Hz scroll response */
+.section-contain {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
 }
 
 /* Terminal blink animation */

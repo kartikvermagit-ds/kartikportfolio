@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 export function CustomCursor() {
-  const [position, setPosition] = useState({ x: -100, y: -100 });
   const [cursorType, setCursorType] = useState<'default' | 'pointer' | 'project' | 'github'>('default');
   const [isTouch, setIsTouch] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
+  // Ultra-fast motion values (Bypasses React component re-rendering on mousemove)
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 28, stiffness: 500, mass: 0.1 };
+  const smoothX = useSpring(cursorX, springConfig);
+  const smoothY = useSpring(cursorY, springConfig);
+
   useEffect(() => {
-    // Check if device is touch primary
+    // Disable on touch devices
     if (window.matchMedia('(pointer: coarse)').matches) {
       setIsTouch(true);
       return;
     }
 
     const onMouseMove = (e: MouseEvent) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
       if (!isVisible) setIsVisible(true);
 
       const target = e.target as HTMLElement | null;
@@ -39,7 +47,7 @@ export function CustomCursor() {
     const onMouseLeave = () => setIsVisible(false);
     const onMouseEnter = () => setIsVisible(true);
 
-    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
     document.addEventListener('mouseleave', onMouseLeave);
     document.addEventListener('mouseenter', onMouseEnter);
 
@@ -48,50 +56,52 @@ export function CustomCursor() {
       document.removeEventListener('mouseleave', onMouseLeave);
       document.removeEventListener('mouseenter', onMouseEnter);
     };
-  }, [isVisible]);
+  }, [isVisible, cursorX, cursorY]);
 
   if (isTouch || !isVisible) return null;
 
+  const isExpanded = cursorType === 'project' || cursorType === 'github';
+  const size = isExpanded ? 64 : cursorType === 'pointer' ? 44 : 32;
+
   return (
     <>
-      {/* Central Dot */}
+      {/* Central High-Performance Dot */}
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-50 rounded-full bg-blue-400"
         style={{
-          width: cursorType === 'default' ? 6 : 4,
-          height: cursorType === 'default' ? 6 : 4,
-          boxShadow: '0 0 10px rgba(59, 130, 246, 0.8)'
+          width: 5,
+          height: 5,
+          x: cursorX,
+          y: cursorY,
+          translateX: '-50%',
+          translateY: '-50%',
+          boxShadow: '0 0 10px rgba(59, 130, 246, 0.9)',
+          opacity: isExpanded ? 0 : 1,
+          willChange: 'transform'
         }}
-        animate={{
-          x: position.x - (cursorType === 'default' ? 3 : 2),
-          y: position.y - (cursorType === 'default' ? 3 : 2),
-          opacity: cursorType === 'project' || cursorType === 'github' ? 0 : 1
-        }}
-        transition={{ type: 'spring', damping: 40, stiffness: 600, mass: 0.1 }}
       />
 
-      {/* Outer Ring / Interactive Pill */}
+      {/* Outer Spring Follower Ring / Interactive Pill */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 flex items-center justify-center rounded-full border border-blue-500/50 backdrop-blur-[2px]"
-        animate={{
-          x: position.x - (cursorType === 'project' || cursorType === 'github' ? 32 : cursorType === 'pointer' ? 22 : 18),
-          y: position.y - (cursorType === 'project' || cursorType === 'github' ? 32 : cursorType === 'pointer' ? 22 : 18),
-          width: cursorType === 'project' || cursorType === 'github' ? 64 : cursorType === 'pointer' ? 44 : 36,
-          height: cursorType === 'project' || cursorType === 'github' ? 64 : cursorType === 'pointer' ? 44 : 36,
+        className="fixed top-0 left-0 pointer-events-none z-50 flex items-center justify-center rounded-full border border-blue-500/50 backdrop-blur-[1px]"
+        style={{
+          width: size,
+          height: size,
+          x: smoothX,
+          y: smoothY,
+          translateX: '-50%',
+          translateY: '-50%',
           backgroundColor:
             cursorType === 'project'
-              ? 'rgba(59, 130, 246, 0.85)'
+              ? 'rgba(59, 130, 246, 0.9)'
               : cursorType === 'github'
-              ? 'rgba(15, 23, 42, 0.9)'
+              ? 'rgba(15, 23, 42, 0.92)'
               : cursorType === 'pointer'
               ? 'rgba(59, 130, 246, 0.15)'
               : 'rgba(59, 130, 246, 0.04)',
-          borderColor:
-            cursorType === 'project' || cursorType === 'github'
-              ? 'rgba(255, 255, 255, 0.3)'
-              : 'rgba(59, 130, 246, 0.4)'
+          borderColor: isExpanded ? 'rgba(255, 255, 255, 0.4)' : 'rgba(59, 130, 246, 0.4)',
+          willChange: 'transform, width, height'
         }}
-        transition={{ type: 'spring', damping: 28, stiffness: 350, mass: 0.2 }}
       >
         {cursorType === 'project' && (
           <span className="text-[10px] font-mono font-bold tracking-widest text-white">VIEW</span>

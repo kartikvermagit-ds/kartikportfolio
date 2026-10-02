@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 interface Card3DProps {
   children: React.ReactNode;
@@ -8,10 +8,15 @@ interface Card3DProps {
 
 export function Card3D({ children, className = '' }: Card3DProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-  const [spotlightPos, setSpotlightPos] = useState({ x: 50, y: 50 });
   const [isHovered, setIsHovered] = useState(false);
+
+  // Motion values to avoid triggering component re-renders on mousemove
+  const rawRotateX = useMotionValue(0);
+  const rawRotateY = useMotionValue(0);
+
+  const springConfig = { damping: 20, stiffness: 300, mass: 0.1 };
+  const rotateX = useSpring(rawRotateX, springConfig);
+  const rotateY = useSpring(rawRotateY, springConfig);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!cardRef.current) return;
@@ -22,21 +27,21 @@ export function Card3D({ children, className = '' }: Card3DProps) {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rX = ((y - centerY) / centerY) * -10; // Max tilt 10deg
-    const rY = ((x - centerX) / centerX) * 10;
+    const rX = ((y - centerY) / centerY) * -8; // Max tilt 8deg
+    const rY = ((x - centerX) / centerX) * 8;
 
-    setRotateX(rX);
-    setRotateY(rY);
-    setSpotlightPos({
-      x: (x / rect.width) * 100,
-      y: (y / rect.height) * 100
-    });
+    rawRotateX.set(rX);
+    rawRotateY.set(rY);
+
+    // Update CSS variables directly for spotlight without re-rendering JSX
+    cardRef.current.style.setProperty('--spotlight-x', `${(x / rect.width) * 100}%`);
+    cardRef.current.style.setProperty('--spotlight-y', `${(y / rect.height) * 100}%`);
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    setRotateX(0);
-    setRotateY(0);
+    rawRotateX.set(0);
+    rawRotateY.set(0);
   };
 
   const handleMouseEnter = () => {
@@ -50,22 +55,25 @@ export function Card3D({ children, className = '' }: Card3DProps) {
         onMouseMove={handleMouseMove}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        animate={{
+        style={{
           rotateX,
           rotateY,
-          scale: isHovered ? 1.02 : 1
+          willChange: 'transform'
+        }}
+        animate={{
+          scale: isHovered ? 1.015 : 1
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-        className={`relative overflow-hidden rounded-2xl border border-slate-800/80 bg-[#0B1220]/70 backdrop-blur-md preserve-3d transition-colors duration-300 ${
-          isHovered ? 'border-blue-500/40 shadow-2xl shadow-blue-500/10' : ''
+        className={`relative overflow-hidden rounded-2xl border border-slate-800/80 bg-[#080D16]/90 backdrop-blur-md preserve-3d transition-colors duration-300 ${
+          isHovered ? 'border-blue-500/50 shadow-2xl shadow-blue-500/10' : ''
         } ${className}`}
       >
-        {/* Dynamic Light Follower */}
+        {/* Hardware-Accelerated Dynamic Light Follower using CSS Variables */}
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
           style={{
             opacity: isHovered ? 0.35 : 0,
-            background: `radial-gradient(circle at ${spotlightPos.x}% ${spotlightPos.y}%, rgba(59, 130, 246, 0.45), transparent 60%)`
+            background: 'radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(59, 130, 246, 0.4), transparent 60%)'
           }}
         />
 

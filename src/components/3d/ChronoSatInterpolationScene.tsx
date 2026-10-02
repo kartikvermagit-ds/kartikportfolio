@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useInView } from '../../hooks/useInView';
 
 function FrameInterpolationMesh() {
   const groupRef = useRef<THREE.Group>(null!);
@@ -78,12 +79,15 @@ function FrameInterpolationMesh() {
 }
 
 export function ChronoSatInterpolationScene() {
+  const { ref, isInView } = useInView();
+
   return (
-    <div className="w-full h-full min-h-[380px] relative flex flex-col justify-between p-4">
+    <div ref={ref} className="w-full h-full min-h-[380px] relative flex flex-col justify-between p-4">
       <div className="absolute inset-0">
         <Canvas
+          frameloop={isInView ? 'always' : 'never'}
           camera={{ position: [0, 0, 4.4], fov: 46 }}
-          gl={{ antialias: true, alpha: true }}
+          gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
           dpr={[1, 1.5]}
         >
           <ambientLight intensity={0.6} />

@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { useInView } from '../../hooks/useInView';
 
 const SYSTEM_NODES = [
   { label: 'AI', position: [0, 1.8, 0], color: '#A855F7', desc: 'Neural / LLM Inference' },
@@ -71,11 +72,14 @@ function NetworkGraph({ scrollProgress }: { scrollProgress: number }) {
 }
 
 export function BrainNetworkScene({ scrollProgress = 0 }: { scrollProgress?: number }) {
+  const { ref, isInView } = useInView();
+
   return (
-    <div className="w-full h-[450px] relative">
+    <div ref={ref} className="w-full h-[450px] relative">
       <Canvas
+        frameloop={isInView ? 'always' : 'never'}
         camera={{ position: [0, 0, 6.2], fov: 45 }}
-        gl={{ antialias: true, alpha: true }}
+        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
         dpr={[1, 1.5]}
       >
         <ambientLight intensity={0.5} />
