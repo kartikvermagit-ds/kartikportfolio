@@ -23,6 +23,7 @@ import { AlgorithmEscapeSection } from './components/sections/AlgorithmEscapeSec
 import { CodeReactorSection } from './components/sections/CodeReactorSection';
 import { SystemBuilderSection } from './components/sections/SystemBuilderSection';
 import { TechStackDetectiveSection } from './components/sections/TechStackDetectiveSection';
+import { SystemMapSection } from './components/sections/SystemMapSection';
 import { CurrentlyBuildingSection } from './components/sections/CurrentlyBuildingSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
@@ -30,11 +31,33 @@ import { BackgroundMusic } from './components/common/BackgroundMusic';
 import { KartikOS } from './components/command/KartikOS';
 import type { PathId } from './types/path';
 import { PATH_STORAGE_KEY } from './data/paths';
+import { useExploration } from './hooks/useExploration';
+import {
+  ExplorationFloatingBadge,
+  ExplorationPanel,
+  MilestoneToast,
+  FirstVisitHint
+} from './components/exploration';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { scrollProgress, scrollY } = useScrollProgress();
   const { repos, userProfile, isLoading: isGitLoading } = useGitHubData();
+  const {
+    state: explorationState,
+    categories: explorationCategories,
+    totalDiscovered,
+    totalItems,
+    isAllDiscovered,
+    isPanelOpen: isExplorationOpen,
+    activeToast,
+    openPanel: openExploration,
+    closePanel: closeExploration,
+    dismissMilestoneToast,
+    dismissFirstVisit,
+    dismissUI: dismissExplorationUI,
+    resetProgress: resetExploration
+  } = useExploration();
   const [selectedPathId, setSelectedPathId] = useState<PathId | null>(() => {
     try {
       return (localStorage.getItem(PATH_STORAGE_KEY) as PathId) || null;
@@ -85,6 +108,37 @@ export function App() {
 
       {/* Flagship Command Center: Kartik OS (Bottom-Right Trigger + Cmd/Ctrl+K Palette) */}
       <KartikOS repos={repos} />
+
+      {/* Task 12: Unified Visitor Exploration System (KARTIK.EXPLORE) */}
+      {!explorationState.uiDismissed && (
+        <ExplorationFloatingBadge
+          totalDiscovered={totalDiscovered}
+          totalItems={totalItems}
+          isPanelOpen={isExplorationOpen}
+          onOpenPanel={openExploration}
+          onDismiss={dismissExplorationUI}
+        />
+      )}
+
+      <ExplorationPanel
+        isOpen={isExplorationOpen}
+        onClose={closeExploration}
+        categories={explorationCategories}
+        totalDiscovered={totalDiscovered}
+        totalItems={totalItems}
+        isAllDiscovered={isAllDiscovered}
+        onReset={resetExploration}
+      />
+
+      <MilestoneToast
+        milestone={activeToast}
+        onDismiss={dismissMilestoneToast}
+      />
+
+      <FirstVisitHint
+        isDismissed={explorationState.firstVisitDismissed}
+        onDismiss={dismissFirstVisit}
+      />
 
       {/* Personalized Floating Route Indicator (Top-Right dismissible HUD) */}
       <RouteIndicator
@@ -163,6 +217,9 @@ export function App() {
 
         {/* TASK 10: Tech Stack Detective Interactive Experience */}
         <TechStackDetectiveSection />
+
+        {/* TASK 11: Live System Map Interactive Developer Ecosystem */}
+        <SystemMapSection />
 
         {/* 11. Currently Building Terminal Dashboard */}
         <CurrentlyBuildingSection />

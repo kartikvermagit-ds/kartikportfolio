@@ -49,6 +49,11 @@ export function VeridexaVerificationGame({
     setFlaggedConflictField(null);
     setMobileActiveTab('DOC');
     setFields(VERIDEXA_SCENARIO_01.fields.map((f) => ({ ...f, status: 'UNEXTRACTED' })));
+    window.dispatchEvent(
+      new CustomEvent('kartik-exploration-mark', {
+        detail: { id: 'exp-veridexa-mission', milestoneId: 'ms-document-auditor' }
+      })
+    );
   }, []);
 
   // Extract a field from the document

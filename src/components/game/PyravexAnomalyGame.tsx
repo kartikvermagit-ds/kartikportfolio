@@ -61,6 +61,11 @@ export function PyravexAnomalyGame({ reducedMotion = false }: PyravexAnomalyGame
     setIsTimerRunning(true);
     setAttemptsCount(0);
     setSubmittedSignal(null);
+    window.dispatchEvent(
+      new CustomEvent('kartik-exploration-mark', {
+        detail: { id: 'exp-pyravex-mission', milestoneId: 'ms-anomaly-hunter' }
+      })
+    );
   }, []);
 
   // Cycle scenario for replayability

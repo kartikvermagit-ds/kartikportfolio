@@ -491,6 +491,21 @@ export function getCommandRegistry(callbacks: {
         navigateTo('tech-stack-detective');
       }
     },
+    {
+      id: 'exp-system-map',
+      title: 'Open Live System Map (Kartik System Graph)',
+      category: 'EXPLORER',
+      description: 'Explore the living ecosystem connecting projects, technologies, concepts, and tools',
+      keywords: ['map', 'system map', 'graph', 'ecosystem', 'topology', 'connections', 'live map'],
+      shortcut: 'M',
+      icon: Network,
+      badge: 'TOPOLOGY',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('system-map');
+      }
+    },
 
     // ==========================================
     // 4. ENGINEERING & PROFILES
@@ -683,6 +698,51 @@ export function getCommandRegistry(callbacks: {
       badgeType: 'emerald',
       action: () => {
         setFeedback('CORE: Python, TypeScript, React 19, FastAPI, Three.js, PyTorch, Supabase, PostgreSQL, Docker');
+      }
+    },
+    // ==========================================
+    // TASK 12: EXPLORATION SYSTEM INTEGRATION
+    // ==========================================
+    {
+      id: 'cmd-explore',
+      title: 'explore',
+      category: 'EXPLORER',
+      description: 'Open KARTIK.EXPLORE protocol panel and discovery map',
+      keywords: ['explore', 'discovery', 'visited', 'checklist', 'protocol'],
+      icon: Compass,
+      badge: 'MAP',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-exploration-panel'));
+      }
+    },
+    {
+      id: 'cmd-progress',
+      title: 'progress',
+      category: 'EXPLORER',
+      description: 'Open visitor exploration progress and discovered layers',
+      keywords: ['progress', 'status', 'discovered', 'completion', 'map'],
+      icon: Compass,
+      badge: 'PROG',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-exploration-panel'));
+      }
+    },
+    {
+      id: 'cmd-journey',
+      title: 'journey',
+      category: 'EXPLORER',
+      description: 'View unified visitor exploration journey protocol',
+      keywords: ['journey', 'path', 'travel', 'milestones'],
+      icon: Compass,
+      badge: 'JOURNEY',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-exploration-panel'));
       }
     }
   ];

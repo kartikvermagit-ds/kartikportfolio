@@ -56,7 +56,14 @@ export function ChronoSatTimeMachine({ reducedMotion = false }: ChronoSatTimeMac
         {!hasStarted ? (
           <TimeMachineIntro
             key="timemachine-intro"
-            onStart={() => setHasStarted(true)}
+            onStart={() => {
+              setHasStarted(true);
+              window.dispatchEvent(
+                new CustomEvent('kartik-exploration-mark', {
+                  detail: { id: 'exp-chronosat-timemachine', milestoneId: 'ms-temporal-pilot' }
+                })
+              );
+            }}
             reducedMotion={reducedMotion}
           />
         ) : (

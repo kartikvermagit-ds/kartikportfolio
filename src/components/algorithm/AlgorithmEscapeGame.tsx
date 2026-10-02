@@ -60,7 +60,14 @@ export function AlgorithmEscapeGame({ reducedMotion = false }: AlgorithmEscapeGa
         {stage === 'INTRO' && (
           <AlgorithmEscapeIntro
             key="escape-intro"
-            onStart={() => setStage('PUZZLE_ARRAY')}
+            onStart={() => {
+              setStage('PUZZLE_ARRAY');
+              window.dispatchEvent(
+                new CustomEvent('kartik-exploration-mark', {
+                  detail: { id: 'exp-algorithm-escape', milestoneId: 'ms-puzzle-resolver' }
+                })
+              );
+            }}
             reducedMotion={reducedMotion}
           />
         )}

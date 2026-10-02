@@ -362,8 +362,12 @@ export function TechStackDetective({ reducedMotion = false }: TechStackDetective
               onStart={() => {
                 setProgress((prev) => ({ ...prev, hasStarted: true }));
                 setViewMode('INVESTIGATING');
+                window.dispatchEvent(new CustomEvent('tech-detective-entered'));
               }}
-              onResume={() => setViewMode('INVESTIGATING')}
+              onResume={() => {
+                setViewMode('INVESTIGATING');
+                window.dispatchEvent(new CustomEvent('tech-detective-entered'));
+              }}
               onOpenConstellation={() => setViewMode('CONSTELLATION')}
               onReset={handleReset}
               reducedMotion={reducedMotion}

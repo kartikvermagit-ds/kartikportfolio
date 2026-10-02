@@ -45,17 +45,17 @@ export const EXPLORATION_PATHS: PathItem[] = [
     title: 'EXPLORE THE STACK',
     shortTitle: 'STACK',
     description: 'Technologies, architecture, algorithms & engineering.',
-    routeConcept: 'STACK → TECHNOLOGY → DETECTIVE → ARCHITECTURE → CODE REACTOR',
+    routeConcept: 'TECHNOLOGY → SYSTEM MAP → DETECTIVE → SYSTEM BUILDER → CODE REACTOR',
     primaryTargetId: 'stack',
     color: '#8B5CF6', // Purple
     secondaryColor: '#A78BFA',
     iconName: 'Cpu',
     steps: [
       { label: 'TECHNOLOGY', targetId: 'stack', description: 'Constellation matrix of technologies' },
+      { label: 'SYSTEM MAP', targetId: 'system-map', description: 'Interactive developer ecosystem & relationship graph' },
       { label: 'DETECTIVE', targetId: 'tech-stack-detective', description: 'Tech Stack Detective interactive architectural clues' },
-      { label: 'ARCHITECTURE', targetId: 'system-builder', description: 'Interactive architecture canvas & data flow simulation' },
-      { label: 'CODE REACTOR', targetId: 'code-reactor', description: 'Interactive Code Reactor & algorithmic reasoning' },
-      { label: 'DSA', targetId: 'algorithm-escape', description: 'Interactive algorithm escape puzzle & coding profiles' }
+      { label: 'SYSTEM BUILDER', targetId: 'system-builder', description: 'Interactive architecture canvas & data flow simulation' },
+      { label: 'CODE REACTOR', targetId: 'code-reactor', description: 'Interactive Code Reactor & algorithmic reasoning' }
     ]
   },
   {

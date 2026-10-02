@@ -64,6 +64,7 @@ export function CodeReactor({ reducedMotion = false }: CodeReactorProps) {
 
   const handleStartBoot = () => {
     setReactorState('INITIALIZING');
+    window.dispatchEvent(new CustomEvent('code-reactor-entered'));
   };
 
   const handleBootComplete = () => {

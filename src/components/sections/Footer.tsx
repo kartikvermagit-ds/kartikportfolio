@@ -1,9 +1,13 @@
 import { SOCIAL_LINKS } from '../../data/profiles';
-import { ArrowUp } from 'lucide-react';
+import { ArrowUp, Compass } from 'lucide-react';
 
 export function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const openExploration = () => {
+    window.dispatchEvent(new CustomEvent('open-exploration-panel'));
   };
 
   return (
@@ -17,6 +21,15 @@ export function Footer() {
           <div className="text-slate-400">
             AI • Data Science • Full-Stack Developer
           </div>
+          <button
+            type="button"
+            onClick={openExploration}
+            className="inline-flex items-center gap-1.5 mt-2 text-blue-400 hover:text-blue-300 hover:underline transition-colors focus:outline-none focus:ring-1 focus:ring-blue-400 rounded px-1 -mx-1 min-h-[32px]"
+            title="Open visitor exploration protocol"
+          >
+            <Compass className="w-3.5 h-3.5" />
+            <span>EXPLORE KARTIK.OS</span>
+          </button>
         </div>
 
         {/* Center: Social Links */}

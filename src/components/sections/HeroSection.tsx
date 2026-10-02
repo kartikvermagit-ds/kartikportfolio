@@ -156,9 +156,15 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
           className="group flex flex-col items-center justify-center focus:outline-none focus-visible:ring-1 focus-visible:ring-orange-400 rounded-lg p-1"
         >
           <span className="mb-1.5 uppercase text-[9px] text-slate-400 group-hover:text-orange-300 tracking-[0.2em] font-semibold transition-colors flex items-center gap-1.5">
-            <span>CHOOSE YOUR PATH</span>
+            <span>EXPLORE</span>
             <span className="text-slate-600">•</span>
-            <span>SCROLL</span>
+            <span>WORK</span>
+            <span className="text-slate-600">•</span>
+            <span>PLAY</span>
+            <span className="text-slate-600">•</span>
+            <span>STACK</span>
+            <span className="text-slate-600">•</span>
+            <span>PERSON</span>
           </span>
           <div className="w-4 h-7 rounded-full border border-slate-500/60 group-hover:border-orange-400/80 p-0.5 flex justify-center shadow-lg shadow-black/50 transition-colors">
             <motion.div

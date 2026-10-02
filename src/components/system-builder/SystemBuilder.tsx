@@ -4,13 +4,9 @@ import {
   Network,
   RotateCcw,
   Target,
-  Sparkles,
-  ExternalLink,
   ArrowRight,
   Code2,
-  Terminal,
   ShieldCheck,
-  CheckCircle2,
   Info
 } from 'lucide-react';
 import type { SystemCategory, SystemComponent, SystemPreset } from '../../types/systemBuilder';
@@ -77,11 +73,22 @@ export function SystemBuilder({ reducedMotion = false }: SystemBuilderProps) {
     }
   }, [isSimulating, simulationStep]);
 
-  // External trigger listener from Tech Stack Detective (Task 10)
+  const handleLoadPreset = (preset: SystemPreset) => {
+    const newMap: Partial<Record<SystemCategory, SystemComponent>> = {};
+    Object.entries(preset.components).forEach(([cat, compId]) => {
+      const comp = SYSTEM_COMPONENTS.find((c) => c.id === compId);
+      if (comp) newMap[cat as SystemCategory] = comp;
+    });
+    setSelectedComponents(newMap);
+    setActivePresetId(preset.id);
+  };
+
+  // External trigger listener from Tech Stack Detective (Task 10) & Live System Map (Task 11)
   useEffect(() => {
     const handleCustomTrigger = (e: Event) => {
       const customEvent = e as CustomEvent<{ presetId?: string }>;
       setHasStarted(true);
+      window.dispatchEvent(new CustomEvent('system-builder-entered'));
       if (customEvent.detail?.presetId) {
         const found = SYSTEM_PRESETS.find((p) => p.id === customEvent.detail.presetId);
         if (found) {
@@ -116,16 +123,6 @@ export function SystemBuilder({ reducedMotion = false }: SystemBuilderProps) {
     setActivePresetId(null);
   };
 
-  const handleLoadPreset = (preset: SystemPreset) => {
-    const newMap: Partial<Record<SystemCategory, SystemComponent>> = {};
-    Object.entries(preset.components).forEach(([cat, compId]) => {
-      const comp = SYSTEM_COMPONENTS.find((c) => c.id === compId);
-      if (comp) newMap[cat as SystemCategory] = comp;
-    });
-    setSelectedComponents(newMap);
-    setActivePresetId(preset.id);
-  };
-
   const handleReset = () => {
     setSelectedComponents({});
     setActivePresetId(null);
@@ -146,7 +143,10 @@ export function SystemBuilder({ reducedMotion = false }: SystemBuilderProps) {
         {!hasStarted ? (
           <SystemBuilderIntro
             key="builder-intro"
-            onStart={() => setHasStarted(true)}
+            onStart={() => {
+              setHasStarted(true);
+              window.dispatchEvent(new CustomEvent('system-builder-entered'));
+            }}
             reducedMotion={reducedMotion}
           />
         ) : (
