@@ -122,51 +122,54 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
           transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           className="lg:col-span-4 flex justify-center lg:justify-end lg:pr-2"
         >
-          <div className="relative group max-w-[260px] sm:max-w-[285px] lg:max-w-[305px] w-full lg:translate-x-5">
+          <div className="relative group max-w-[280px] sm:max-w-[310px] w-full lg:translate-x-4">
             {/* Ambient Multi-Layer Glow Aura */}
-            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-orange-500/30 via-amber-500/20 to-blue-500/30 blur-2xl opacity-70 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-orange-500/25 via-amber-500/15 to-blue-500/25 blur-2xl opacity-60 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
             {/* Futuristic HUD Corner Crosshairs */}
-            <div className="absolute -top-3 -left-3 text-sm font-mono text-orange-400/80 select-none pointer-events-none z-20">⌜</div>
-            <div className="absolute -top-3 -right-3 text-sm font-mono text-orange-400/80 select-none pointer-events-none z-20">⌝</div>
-            <div className="absolute -bottom-3 -left-3 text-sm font-mono text-orange-400/80 select-none pointer-events-none z-20">⌞</div>
-            <div className="absolute -bottom-3 -right-3 text-sm font-mono text-orange-400/80 select-none pointer-events-none z-20">⌟</div>
+            <div className="absolute -top-2.5 -left-2.5 text-xs font-mono text-orange-400/80 select-none pointer-events-none z-20">⌜</div>
+            <div className="absolute -top-2.5 -right-2.5 text-xs font-mono text-orange-400/80 select-none pointer-events-none z-20">⌝</div>
+            <div className="absolute -bottom-2.5 -left-2.5 text-xs font-mono text-orange-400/80 select-none pointer-events-none z-20">⌞</div>
+            <div className="absolute -bottom-2.5 -right-2.5 text-xs font-mono text-orange-400/80 select-none pointer-events-none z-20">⌟</div>
 
             {/* Glowing Cyber Gradient Frame */}
-            <div className="relative p-[2.5px] rounded-3xl bg-gradient-to-tr from-orange-500 via-amber-400 via-purple-500 to-blue-500 shadow-2xl shadow-orange-500/20 transition-all duration-500 group-hover:shadow-orange-500/40">
-              {/* Inner Dark Shell */}
-              <div className="relative rounded-[22px] bg-[#080D16] p-2 overflow-hidden border border-slate-800">
-                {/* HUD Top Bar Header */}
-                <div className="flex items-center justify-between px-3 py-2 mb-2 rounded-lg bg-[#05070B]/90 border border-slate-800/80 text-[10px] font-mono">
-                  <div className="flex items-center gap-1.5 text-slate-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-ping" />
-                    <span className="text-orange-400 font-bold tracking-wider">KARTIK VERMA</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-emerald-400">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span className="tracking-widest">DEV // ACTIVE</span>
-                  </div>
+            <div className="relative p-[2px] rounded-3xl bg-gradient-to-b from-orange-500/70 via-amber-400/30 to-blue-500/50 shadow-2xl shadow-orange-500/15 transition-all duration-500 group-hover:shadow-orange-500/30">
+              {/* Inner Shell */}
+              <div className="relative rounded-[22px] overflow-hidden bg-[#080D16] border border-white/5">
+                {/* Floating Top-Left ID Monospace */}
+                <div className="absolute top-3 left-3 z-20 px-2 py-0.5 rounded-md bg-[#080D16]/85 border border-slate-800 text-[10px] font-mono text-slate-300 backdrop-blur-md">
+                  <span className="text-orange-400 font-bold">KV</span>.2026
                 </div>
 
-                {/* Proper Uncropped Photo Container */}
-                <div className="relative aspect-[3/4] w-full rounded-xl overflow-hidden bg-slate-950">
+                {/* Floating Top Status Pill */}
+                <div className="absolute top-3 right-3 z-20 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#080D16]/85 border border-slate-700/60 backdrop-blur-md text-[10px] font-mono text-emerald-400 shadow-md">
+                  <span className="relative flex h-1.5 w-1.5">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400" />
+                  </span>
+                  <span className="tracking-widest font-semibold ml-0.5">DEV // ACTIVE</span>
+                </div>
+
+                {/* Photo Container with 4:5 Aspect Ratio */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden bg-slate-950">
                   <img
                     src="/photo.jpeg"
                     alt="Kartik Verma"
-                    className="w-full h-full object-cover object-top filter contrast-[1.04] brightness-[1.02] group-hover:scale-105 transition-transform duration-700 ease-out"
+                    className="w-full h-full object-cover object-center filter contrast-[1.04] brightness-[1.01] group-hover:scale-105 transition-transform duration-700 ease-out"
                   />
-                  {/* Subtle Theme Gradients Overlay (Does not obscure face, blends edges) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#080D16] via-transparent to-transparent opacity-60 pointer-events-none" />
 
-                  {/* Floating Glassmorphism Spec Tag over bottom of photo */}
-                  <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-lg bg-[#080D16]/90 border border-slate-700/70 backdrop-blur-md flex items-center justify-between text-xs font-mono shadow-xl">
+                  {/* Soft Vignette / Edge Shadow to harmonize background lighting */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#080D16] via-[#080D16]/25 to-transparent opacity-80 pointer-events-none" />
+
+                  {/* Clean Minimalist Bottom Floating Bar */}
+                  <div className="absolute bottom-3 left-3 right-3 p-2.5 rounded-xl bg-[#080D16]/85 border border-slate-700/50 backdrop-blur-md flex items-center justify-between text-xs font-mono shadow-xl">
                     <div>
-                      <div className="text-[10px] text-slate-400 uppercase tracking-wider">Specialization</div>
-                      <div className="font-semibold text-slate-100 text-[11px]">AI & Data Science</div>
+                      <div className="text-[10px] text-orange-400 font-semibold uppercase tracking-wider">Kartik Verma</div>
+                      <div className="font-medium text-slate-200 text-[11px]">AI & Data Science</div>
                     </div>
                     <div className="text-right">
-                      <div className="text-[10px] text-orange-400 font-bold">PSIT '26</div>
-                      <div className="text-[10px] text-slate-400">Kanpur, IN</div>
+                      <div className="text-[10px] text-slate-400">PSIT Kanpur</div>
+                      <div className="text-[10px] text-blue-400 font-medium">B.Tech '26</div>
                     </div>
                   </div>
                 </div>
