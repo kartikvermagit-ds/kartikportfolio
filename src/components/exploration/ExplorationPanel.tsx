@@ -11,6 +11,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import type { ExplorationCategorySummary, ExplorationItem } from '../../types/exploration';
+import { INITIAL_EASTER_EGGS, EASTER_EGGS_STORAGE_KEY } from '../../data/easterEggs';
 
 interface ExplorationPanelProps {
   isOpen: boolean;
@@ -31,10 +32,30 @@ export const ExplorationPanel: React.FC<ExplorationPanelProps> = ({
   isAllDiscovered,
   onReset
 }) => {
-  const [activeTab, setActiveTab] = useState<'ALL' | 'WORK' | 'PLAY' | 'STACK' | 'PERSON'>('ALL');
+  const [activeTab, setActiveTab] = useState<'ALL' | 'WORK' | 'PLAY' | 'STACK' | 'PERSON' | 'SECRETS'>('ALL');
+  const [easterEggs, setEasterEggs] = useState(INITIAL_EASTER_EGGS);
   const [showResetConfirm, setShowResetConfirm] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    try {
+      const stored = localStorage.getItem(EASTER_EGGS_STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as Record<string, boolean>;
+        setEasterEggs(
+          INITIAL_EASTER_EGGS.map((egg) => ({
+            ...egg,
+            isDiscovered: Boolean(parsed[egg.id])
+          }))
+        );
+      }
+    } catch {}
+  }, [isOpen]);
+
+  const discoveredSecretsCount = easterEggs.filter((e) => e.isDiscovered).length;
+  const totalSecretsCount = easterEggs.length;
 
   // Close on ESC
   useEffect(() => {
@@ -126,7 +147,7 @@ export const ExplorationPanel: React.FC<ExplorationPanelProps> = ({
 
         {/* Category Tabs */}
         <div className="flex items-center gap-1 px-5 py-2.5 border-b border-slate-800/60 bg-slate-950/40 overflow-x-auto no-scrollbar">
-          {(['ALL', 'WORK', 'PLAY', 'STACK', 'PERSON'] as const).map((tab) => {
+          {(['ALL', 'WORK', 'PLAY', 'STACK', 'PERSON', 'SECRETS'] as const).map((tab) => {
             const isActive = activeTab === tab;
             return (
               <button
@@ -140,10 +161,15 @@ export const ExplorationPanel: React.FC<ExplorationPanelProps> = ({
                 }`}
               >
                 <span>{tab}</span>
-                {tab !== 'ALL' && (
+                {tab !== 'ALL' && tab !== 'SECRETS' && (
                   <span className="text-[10px] opacity-75">
                     {categories.find((c) => c.category === tab)?.discoveredCount ?? 0}/
                     {categories.find((c) => c.category === tab)?.totalCount ?? 0}
+                  </span>
+                )}
+                {tab === 'SECRETS' && (
+                  <span className="text-[10px] text-amber-400 font-semibold">
+                    {discoveredSecretsCount}/{totalSecretsCount}
                   </span>
                 )}
               </button>
@@ -277,6 +303,57 @@ export const ExplorationPanel: React.FC<ExplorationPanelProps> = ({
               </div>
             );
           })}
+
+          {/* Secret Discoveries Section (Task 13) */}
+          {(activeTab === 'ALL' || activeTab === 'SECRETS') && (
+            <div className="space-y-2.5 pt-2 border-t border-slate-800/80">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-amber-400" />
+                  <span className="font-mono text-xs font-bold tracking-wider text-slate-200 uppercase">
+                    SECRET DISCOVERIES
+                  </span>
+                </div>
+                <span className="font-mono text-xs text-amber-400 font-semibold">
+                  {discoveredSecretsCount} / {totalSecretsCount} FOUND
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                {easterEggs.map((egg) => (
+                  <div
+                    key={egg.id}
+                    className={`flex items-start gap-3 p-3 rounded-xl border transition-all ${
+                      egg.isDiscovered
+                        ? 'bg-amber-950/20 border-amber-500/40 text-slate-200'
+                        : 'bg-slate-950/40 border-slate-900/80 text-slate-500 opacity-60'
+                    }`}
+                  >
+                    {egg.isDiscovered ? (
+                      <CheckCircle2 className="w-4 h-4 text-amber-400 mt-0.5 flex-shrink-0" />
+                    ) : (
+                      <Circle className="w-4 h-4 text-slate-700 mt-0.5 flex-shrink-0" />
+                    )}
+                    <div className="flex-1 min-w-0 font-mono text-xs">
+                      <div className="flex items-center justify-between gap-1">
+                        <span className={egg.isDiscovered ? 'text-amber-300 font-semibold truncate' : 'text-slate-500'}>
+                          {egg.isDiscovered ? egg.title : 'Undiscovered Secret'}
+                        </span>
+                        {egg.isDiscovered && (
+                          <span className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 flex-shrink-0">
+                            FOUND
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-[11px] font-sans text-slate-400 mt-0.5 leading-snug">
+                        {egg.isDiscovered ? egg.discoveryMessage : 'Explore the portfolio to reveal this hidden layer.'}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Footer Area */}

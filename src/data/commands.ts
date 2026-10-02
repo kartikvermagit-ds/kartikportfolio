@@ -744,6 +744,67 @@ export function getCommandRegistry(callbacks: {
         closeOS();
         window.dispatchEvent(new CustomEvent('open-exploration-panel'));
       }
+    },
+    // ==========================================
+    // TASK 13: DEVELOPER MODE & EASTER EGGS
+    // ==========================================
+    {
+      id: 'cmd-dev',
+      title: 'dev',
+      category: 'ENGINEERING',
+      description: 'Toggle KARTIK.DEV mode with HUD, wireframes, and section telemetry',
+      keywords: ['dev', 'developer', 'developer mode', 'debug', 'system diagnostics'],
+      icon: Terminal,
+      badge: 'DEV',
+      badgeType: 'blue',
+      shortcut: 'Ctrl+Shift+D',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('toggle-dev-mode'));
+      }
+    },
+    {
+      id: 'cmd-terminal',
+      title: 'terminal',
+      category: 'ENGINEERING',
+      description: 'Open interactive KARTIK TERMINAL simulation CLI',
+      keywords: ['terminal', 'cli', 'bash', 'sh', 'console', 'command line'],
+      icon: Terminal,
+      badge: 'CLI',
+      badgeType: 'emerald',
+      shortcut: 'T',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-dev-terminal'));
+      }
+    },
+    {
+      id: 'cmd-secrets',
+      title: 'secrets',
+      category: 'EXPLORER',
+      description: 'Open discovered Easter eggs & secret portfolio discoveries',
+      keywords: ['secrets', 'discoveries', 'easter eggs', 'hidden'],
+      icon: Sparkles,
+      badge: 'SECRET',
+      badgeType: 'purple',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-exploration-panel'));
+      }
+    },
+    {
+      id: 'cmd-discoveries',
+      title: 'discoveries',
+      category: 'EXPLORER',
+      description: 'View discovered secret layers and hidden Easter eggs',
+      keywords: ['discoveries', 'found', 'unlocked', 'easter'],
+      icon: Sparkles,
+      badge: 'SECRET',
+      badgeType: 'purple',
+      action: () => {
+        closeOS();
+        window.dispatchEvent(new CustomEvent('open-exploration-panel'));
+      }
     }
   ];
 

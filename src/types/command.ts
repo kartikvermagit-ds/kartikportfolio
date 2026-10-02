@@ -17,7 +17,7 @@ export interface CommandItem {
   shortcut?: string;
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
-  badgeType?: 'default' | 'live' | 'tech' | 'amber' | 'blue' | 'emerald';
+  badgeType?: 'default' | 'live' | 'tech' | 'amber' | 'blue' | 'emerald' | 'purple';
   action: () => void | Promise<void>;
 }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SectionHeading } from '../common/SectionHeading';
 import { SystemMap } from '../system-map/SystemMap';
+import { DevLabel } from '../developer/DevLabel';
 
 export function SystemMapSection() {
   const [reducedMotion] = useState<boolean>(() => {
@@ -18,6 +19,11 @@ export function SystemMapSection() {
       id="system-map"
       className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto relative scroll-mt-24"
     >
+      {/* Developer Mode Section Debug Label */}
+      <div className="mb-2">
+        <DevLabel section="LIVE SYSTEM MAP" id="system-map" type="ECOSYSTEM" state="ACTIVE" />
+      </div>
+
       {/* Standardized Section Heading */}
       <SectionHeading
         number="12 — SYSTEM TOPOLOGY"

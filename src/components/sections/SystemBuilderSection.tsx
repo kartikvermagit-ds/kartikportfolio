@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { SectionHeading } from '../common/SectionHeading';
 import { SystemBuilder } from '../system-builder/SystemBuilder';
+import { DevLabel } from '../developer/DevLabel';
 
 export function SystemBuilderSection() {
   const [reducedMotion] = useState<boolean>(() => {
@@ -18,6 +19,11 @@ export function SystemBuilderSection() {
       id="system-builder"
       className="py-24 sm:py-28 px-4 sm:px-6 lg:px-8 max-w-[1240px] mx-auto relative scroll-mt-24"
     >
+      {/* Developer Mode Section Debug Label */}
+      <div className="mb-2">
+        <DevLabel section="SYSTEM BUILDER" id="system-builder" type="LAB" state="ACTIVE" />
+      </div>
+
       {/* Standardized Section Heading */}
       <SectionHeading
         number="10 — SYSTEM ARCHITECTURE"

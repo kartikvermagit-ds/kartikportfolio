@@ -25,8 +25,8 @@ export const EXPLORATION_PATHS: PathItem[] = [
     number: '02',
     title: 'PLAY & EXPERIMENT',
     shortTitle: 'PLAY',
-    description: 'Interactive demos, games, simulations & hidden experiences.',
-    routeConcept: '3D WORLD → PLAYGROUND → GAMES → EXPERIMENTS → EASTER EGGS',
+    description: 'Interactive demos, games, simulations & hidden secret discoveries.',
+    routeConcept: 'GAMES → SIMULATIONS → EXPERIMENTS → SECRET DISCOVERIES',
     primaryTargetId: 'work', // Routes to the interactive 3D WebGL scenes
     color: '#F59E0B', // Amber
     secondaryColor: '#FBBF24',
@@ -44,8 +44,8 @@ export const EXPLORATION_PATHS: PathItem[] = [
     number: '03',
     title: 'EXPLORE THE STACK',
     shortTitle: 'STACK',
-    description: 'Technologies, architecture, algorithms & engineering.',
-    routeConcept: 'TECHNOLOGY → SYSTEM MAP → DETECTIVE → SYSTEM BUILDER → CODE REACTOR',
+    description: 'Technologies, architecture, algorithms & developer mode.',
+    routeConcept: 'TECHNOLOGY → SYSTEM MAP → DETECTIVE → BUILDER → DEV MODE',
     primaryTargetId: 'stack',
     color: '#8B5CF6', // Purple
     secondaryColor: '#A78BFA',

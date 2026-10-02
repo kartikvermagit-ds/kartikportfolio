@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ArrowUpRight, Terminal } from 'lucide-react';
 import { GithubIcon } from './Icons';
@@ -21,6 +21,26 @@ export function Navbar({ scrollY }: NavbarProps) {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('hero');
   const isScrolled = scrollY > 40;
+
+  const clickCountRef = useRef(0);
+  const clickTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleLogoClick = (e: React.MouseEvent) => {
+    clickCountRef.current += 1;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+    clickTimerRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 2000);
+
+    if (clickCountRef.current >= 5) {
+      e.preventDefault();
+      clickCountRef.current = 0;
+      window.dispatchEvent(new CustomEvent('open-source-inspector'));
+      window.dispatchEvent(
+        new CustomEvent('discover-easter-egg', { detail: { id: 'ee-source-inspector' } })
+      );
+    }
+  };
 
   useEffect(() => {
     const handleScrollSpy = () => {
@@ -59,7 +79,9 @@ export function Navbar({ scrollY }: NavbarProps) {
           {/* Logo / Monogram */}
           <a
             href="#"
-            className="flex items-center gap-3 group no-underline text-inherit"
+            onClick={handleLogoClick}
+            className="flex items-center gap-3 group no-underline text-inherit cursor-pointer"
+            title="Kartik Verma (5 clicks reveals Source Inspector)"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 via-amber-500 to-blue-600 p-[1px] flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:scale-105 transition-transform">
               <div className="w-full h-full bg-[#05070B] rounded-[7px] flex items-center justify-center font-mono font-bold text-xs text-orange-400">

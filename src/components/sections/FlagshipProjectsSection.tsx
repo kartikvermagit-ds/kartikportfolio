@@ -4,6 +4,7 @@ import { ProjectSelector } from '../case-study/ProjectSelector';
 import { CaseStudyView } from '../case-study/CaseStudyView';
 import { CASE_STUDIES } from '../../data/caseStudies';
 import type { ProjectCaseStudy } from '../../types/caseStudy';
+import { DevLabel } from '../developer/DevLabel';
 
 export function FlagshipProjectsSection() {
   const [activeProjectId, setActiveProjectId] = useState<string>(CASE_STUDIES[0].id);
@@ -67,6 +68,11 @@ export function FlagshipProjectsSection() {
         <span id="nudgekavach" className="block -mt-24 h-24" />
         <span id="chronosat" className="block -mt-24 h-24" />
         <span id="hostelhub" className="block -mt-24 h-24" />
+      </div>
+
+      {/* Developer Mode Section Debug Label */}
+      <div className="mb-2">
+        <DevLabel section="FLAGSHIP PROJECTS" id="work" type="SHOWCASE" state="ACTIVE" />
       </div>
 
       {/* Cinematic Section Heading */}

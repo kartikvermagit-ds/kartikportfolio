@@ -38,6 +38,7 @@ import {
   MilestoneToast,
   FirstVisitHint
 } from './components/exploration';
+import { DeveloperMode } from './components/developer';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -138,6 +139,12 @@ export function App() {
       <FirstVisitHint
         isDismissed={explorationState.firstVisitDismissed}
         onDismiss={dismissFirstVisit}
+      />
+
+      {/* Task 13: Developer Mode & Easter Eggs (KARTIK.DEV MODE) */}
+      <DeveloperMode
+        totalExplorationDiscovered={totalDiscovered}
+        totalExplorationItems={totalItems}
       />
 
       {/* Personalized Floating Route Indicator (Top-Right dismissible HUD) */}

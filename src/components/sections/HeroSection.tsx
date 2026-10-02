@@ -7,6 +7,7 @@ import { HeroHUDCards } from '../hero/HeroHUDCards';
 import { HeroOrbitalCard } from '../hero/HeroOrbitalCard';
 import { MagneticButton } from '../common/MagneticButton';
 import { SOCIAL_LINKS } from '../../data/profiles';
+import { DevLabel } from '../developer/DevLabel';
 
 interface HeroSectionProps {
   mouse?: { normalizedX: number; normalizedY: number };
@@ -28,6 +29,7 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
 
   return (
     <section
+      id="hero"
       onMouseMove={handleMouseMove}
       className="relative min-h-[94vh] w-full flex flex-col justify-between pt-32 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden bg-[#05070B]"
     >
@@ -38,6 +40,11 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
       <div className="relative z-10 max-w-[1360px] mx-auto my-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-center py-6 sm:py-8">
         {/* Left Column: Personal Narrative & Call to Actions */}
         <div className="lg:col-span-6 xl:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left">
+          {/* Developer Mode Section Debug Label */}
+          <div className="mb-2">
+            <DevLabel section="HERO / CORE" id="hero" type="SCENE" state="INTERACTIVE" />
+          </div>
+
           {/* Academic / Location Monospace Badge */}
           <motion.div
             initial={{ opacity: 0, y: -15 }}

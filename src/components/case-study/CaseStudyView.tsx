@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { AlertCircle, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ArrowRight, ShieldCheck, Radio } from 'lucide-react';
 import { ProjectHero } from './ProjectHero';
 import { ProjectInteractiveWorld } from './ProjectInteractiveWorld';
 import { ProjectArchitecture } from './ProjectArchitecture';
@@ -21,6 +21,32 @@ export function CaseStudyView({
   onSelectNextProject,
   reducedMotion = false
 }: CaseStudyViewProps) {
+  const [secretRevealed, setSecretRevealed] = useState(false);
+
+  const getSecretMessage = () => {
+    switch (project.id) {
+      case 'pyravex':
+        return 'THERMAL SIGNAL > ANALYSIS LAYER: NASA thermal deviation baseline verified across spectral channels.';
+      case 'veridexa':
+        return 'DOCUMENT TRACE > EVIDENCE CHAIN AVAILABLE: Ground truth bounding boxes linked to verification chain.';
+      case 'chronosat':
+        return 'TEMPORAL STATE > INTERPOLATION LAYER: Multi-band optical flow frame synthesized.';
+      case 'hostelhub':
+        return 'RESOURCE NODE > CONNECTED: Distributed multi-tenant residency dispatch pipeline synchronized.';
+      case 'nudgekavach':
+        return 'EVIDENCE TRACE > INSPECTION LAYER: Anonymized civic telemetry coordinate stream verified.';
+      default:
+        return 'SUBSURFACE LAYER > ACTIVE: Architectural specifications verified.';
+    }
+  };
+
+  const handleRevealSecret = () => {
+    setSecretRevealed(true);
+    playPathFeedback('correct');
+    window.dispatchEvent(
+      new CustomEvent('discover-easter-egg', { detail: { id: 'ee-project-secrets' } })
+    );
+  };
 
   const handleNextClick = () => {
     playPathFeedback('select');
@@ -44,6 +70,25 @@ export function CaseStudyView({
         >
           {/* 1. Cinematic Project Hero & 3D Environment */}
           <ProjectHero project={project} reducedMotion={reducedMotion} />
+
+          {/* Subtle Discoverable Telemetry Marker (Task 13: Project Secrets) */}
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-6 px-1">
+            <button
+              type="button"
+              onClick={handleRevealSecret}
+              title="Inspect hidden project telemetry"
+              className="group inline-flex items-center gap-1.5 text-[10px] font-mono text-slate-500 hover:text-amber-400 transition-colors cursor-pointer py-1"
+            >
+              <Radio className="w-3 h-3 text-slate-600 group-hover:text-amber-400 transition-colors" />
+              <span>PROJECT TELEMETRY TRACE</span>
+            </button>
+
+            {secretRevealed && (
+              <div className="text-[11px] font-mono text-amber-300 bg-amber-950/40 border border-amber-500/40 px-3 py-1 rounded-lg animate-in fade-in duration-200">
+                &gt; {getSecretMessage()}
+              </div>
+            )}
+          </div>
 
           {/* 2. Problem Statement & What Was Built */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-14">
