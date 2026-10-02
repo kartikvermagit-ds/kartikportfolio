@@ -71,6 +71,89 @@ export function getCommandRegistry(callbacks: {
       }
     },
     {
+      id: 'nav-pathways',
+      title: 'Go to Pathways (Choose Your Path)',
+      category: 'NAVIGATION',
+      description: 'Interactive visitor routing system (Work, Play, Stack, Person)',
+      keywords: ['path', 'pathways', 'routing', 'what brings you here', 'choose', 'route', 'journey', 'explore'],
+      shortcut: 'P',
+      icon: Compass,
+      badge: 'PATH',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('pathways');
+      }
+    },
+    {
+      id: 'route-work',
+      title: 'Initialize Route: Explore My Work (01)',
+      category: 'NAVIGATION',
+      description: 'Projects, systems, experiments & real-world builds',
+      keywords: ['work', 'route work', 'explore work', 'flagship', 'projects'],
+      icon: Code2,
+      badge: '01',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        try { localStorage.setItem('kartik-portfolio-path', 'work'); } catch {}
+        window.dispatchEvent(new CustomEvent('kartik-path-selected', { detail: { pathId: 'work' } }));
+        setFeedback('Route Initialized: WORK');
+        navigateTo('work');
+      }
+    },
+    {
+      id: 'route-play',
+      title: 'Initialize Route: Play & Experiment (02)',
+      category: 'NAVIGATION',
+      description: 'Interactive demos, 3D simulations & hidden experiences',
+      keywords: ['play', 'experiment', 'route play', 'games', '3d'],
+      icon: Sparkles,
+      badge: '02',
+      badgeType: 'amber',
+      action: () => {
+        closeOS();
+        try { localStorage.setItem('kartik-portfolio-path', 'play'); } catch {}
+        window.dispatchEvent(new CustomEvent('kartik-path-selected', { detail: { pathId: 'play' } }));
+        setFeedback('Route Initialized: PLAY');
+        navigateTo('work');
+      }
+    },
+    {
+      id: 'route-stack',
+      title: 'Initialize Route: Explore The Stack (03)',
+      category: 'NAVIGATION',
+      description: 'Technologies, architecture, algorithms & engineering',
+      keywords: ['stack', 'route stack', 'tech', 'architecture', 'dsa'],
+      icon: Binary,
+      badge: '03',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        try { localStorage.setItem('kartik-portfolio-path', 'stack'); } catch {}
+        window.dispatchEvent(new CustomEvent('kartik-path-selected', { detail: { pathId: 'stack' } }));
+        setFeedback('Route Initialized: STACK');
+        navigateTo('stack');
+      }
+    },
+    {
+      id: 'route-person',
+      title: 'Initialize Route: Get To Know Kartik (04)',
+      category: 'NAVIGATION',
+      description: 'Background, learning journey, interests & current focus',
+      keywords: ['person', 'kartik', 'route person', 'about', 'journey'],
+      icon: Cpu,
+      badge: '04',
+      badgeType: 'emerald',
+      action: () => {
+        closeOS();
+        try { localStorage.setItem('kartik-portfolio-path', 'person'); } catch {}
+        window.dispatchEvent(new CustomEvent('kartik-path-selected', { detail: { pathId: 'person' } }));
+        setFeedback('Route Initialized: PERSON');
+        navigateTo('about');
+      }
+    },
+    {
       id: 'nav-about',
       title: 'Go to About (Building by Doing)',
       category: 'NAVIGATION',

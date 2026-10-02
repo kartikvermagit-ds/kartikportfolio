@@ -143,29 +143,38 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
         </motion.div>
       </div>
 
-      {/* Subtle Bottom Scroll Indicator with Mouse Icon */}
+      {/* Subtle Bottom Scroll Indicator linking to Choose Your Path */}
       <motion.div
         animate={{ opacity: isScrolledPast ? 0 : 1 }}
         transition={{ duration: 0.3 }}
-        className="relative z-10 flex flex-col items-center justify-center text-slate-400 font-mono text-[10px] tracking-widest pointer-events-none mt-4 select-none"
+        className="relative z-10 flex flex-col items-center justify-center text-slate-400 font-mono text-[10px] tracking-widest mt-4 select-none"
       >
-        <span className="mb-1.5 uppercase text-[9px] text-slate-400 tracking-[0.2em] font-semibold">
-          SCROLL TO EXPLORE
-        </span>
-        <div className="w-4 h-7 rounded-full border border-slate-500/60 p-0.5 flex justify-center shadow-lg shadow-black/50">
-          <motion.div
-            className="w-1 h-1.5 rounded-full bg-orange-400"
-            animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
-            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
-          />
-        </div>
-        <motion.div
-          animate={{ y: [0, 3, 0] }}
-          transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut', delay: 0.2 }}
-          className="mt-1"
+        <a
+          href="#pathways"
+          data-cursor="pointer"
+          aria-label="Scroll to Choose Your Path section"
+          className="group flex flex-col items-center justify-center focus:outline-none focus-visible:ring-1 focus-visible:ring-orange-400 rounded-lg p-1"
         >
-          <ArrowDown className="w-3 h-3 text-orange-400" />
-        </motion.div>
+          <span className="mb-1.5 uppercase text-[9px] text-slate-400 group-hover:text-orange-300 tracking-[0.2em] font-semibold transition-colors flex items-center gap-1.5">
+            <span>CHOOSE YOUR PATH</span>
+            <span className="text-slate-600">•</span>
+            <span>SCROLL</span>
+          </span>
+          <div className="w-4 h-7 rounded-full border border-slate-500/60 group-hover:border-orange-400/80 p-0.5 flex justify-center shadow-lg shadow-black/50 transition-colors">
+            <motion.div
+              className="w-1 h-1.5 rounded-full bg-orange-400"
+              animate={{ y: [0, 8, 0], opacity: [1, 0.3, 1] }}
+              transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut' }}
+            />
+          </div>
+          <motion.div
+            animate={{ y: [0, 3, 0] }}
+            transition={{ repeat: Infinity, duration: 1.6, ease: 'easeInOut', delay: 0.2 }}
+            className="mt-1"
+          >
+            <ArrowDown className="w-3 h-3 text-orange-400 group-hover:translate-y-0.5 transition-transform" />
+          </motion.div>
+        </a>
       </motion.div>
     </section>
   );

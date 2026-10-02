@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useScrollProgress } from './hooks/useScrollProgress';
 import { useGitHubData } from './hooks/useGitHubData';
 import { CustomCursor } from './components/common/CustomCursor';
 import { Navbar } from './components/common/Navbar';
 import { LoadingScreen } from './components/common/LoadingScreen';
 import { HeroSection } from './components/sections/HeroSection';
+import { ChooseYourPathSection } from './components/paths/ChooseYourPathSection';
+import { RouteIndicator } from './components/paths/RouteIndicator';
 import { BrainTransitionSection } from './components/sections/BrainTransitionSection';
 import { AboutSection } from './components/sections/AboutSection';
 import { WhatIBuildSection } from './components/sections/WhatIBuildSection';
@@ -19,11 +21,49 @@ import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
 import { BackgroundMusic } from './components/common/BackgroundMusic';
 import { KartikOS } from './components/command/KartikOS';
+import type { PathId } from './types/path';
+import { PATH_STORAGE_KEY } from './data/paths';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const { scrollProgress, scrollY } = useScrollProgress();
   const { repos, userProfile, isLoading: isGitLoading } = useGitHubData();
+  const [selectedPathId, setSelectedPathId] = useState<PathId | null>(() => {
+    try {
+      return (localStorage.getItem(PATH_STORAGE_KEY) as PathId) || null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    const handlePathSelect = (e: Event) => {
+      const customEvent = e as CustomEvent<{ pathId: PathId }>;
+      if (customEvent.detail?.pathId) {
+        setSelectedPathId(customEvent.detail.pathId);
+      }
+    };
+    window.addEventListener('kartik-path-selected', handlePathSelect);
+    return () => window.removeEventListener('kartik-path-selected', handlePathSelect);
+  }, []);
+
+  const handleClearPath = () => {
+    setSelectedPathId(null);
+    try {
+      localStorage.removeItem(PATH_STORAGE_KEY);
+    } catch {}
+  };
+
+  const handleNavigateTo = (targetId: string) => {
+    if (targetId === 'hero' || targetId === 'top') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   return (
     <div className="relative min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-orange-500/25 selection:text-orange-200">
@@ -38,6 +78,13 @@ export function App() {
 
       {/* Flagship Command Center: Kartik OS (Bottom-Right Trigger + Cmd/Ctrl+K Palette) */}
       <KartikOS repos={repos} />
+
+      {/* Personalized Floating Route Indicator (Top-Right dismissible HUD) */}
+      <RouteIndicator
+        selectedPathId={selectedPathId}
+        onClearPath={handleClearPath}
+        onNavigateTo={handleNavigateTo}
+      />
 
       {/* Top Global Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-transparent z-50 pointer-events-none">
@@ -55,7 +102,10 @@ export function App() {
         {/* 1. Hero: Enter My World */}
         <HeroSection scrollY={scrollY} />
 
-        {/* 2. 3D Digital Brain / Systems Transition */}
+        {/* 2. Choose Your Path: Interactive Visitor Routing System */}
+        <ChooseYourPathSection onPathSelected={(pathId) => setSelectedPathId(pathId)} />
+
+        {/* 3. 3D Digital Brain / Systems Transition */}
         <BrainTransitionSection scrollProgress={scrollProgress} />
 
         {/* 3. About: Building by Doing */}
