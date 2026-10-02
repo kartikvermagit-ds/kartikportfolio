@@ -14,38 +14,42 @@ export function PathConnections({
 }: PathConnectionsProps) {
   const currentPath = hoveredPath || activePath;
 
-  // Path coordinates connecting Center (500, 340) to nodes
-  // Top: WORK (500, 130)
-  // Left: PLAY (220, 340)
-  // Right: STACK (780, 340)
-  // Bottom: PERSON (500, 550)
+  // Path coordinates connecting Center (500, 300) to 4 surrounding nodes
+  // Top: WORK (500, 150)
+  // Left: PLAY (300, 300)
+  // Right: STACK (700, 300)
+  // Bottom: PERSON (500, 450)
 
-  const lineDefs: Record<PathId, { d: string; id: string; targetAngle: number }> = {
+  const lineDefs: Record<PathId, { d: string; id: string; portX: number; portY: number }> = {
     work: {
-      d: 'M 500 275 L 500 145',
+      d: 'M 500 215 L 500 150',
       id: 'conn-work',
-      targetAngle: -90
+      portX: 500,
+      portY: 215
     },
     play: {
-      d: 'M 410 340 L 260 340',
+      d: 'M 405 300 L 300 300',
       id: 'conn-play',
-      targetAngle: 180
+      portX: 405,
+      portY: 300
     },
     stack: {
-      d: 'M 590 340 L 740 340',
+      d: 'M 595 300 L 700 300',
       id: 'conn-stack',
-      targetAngle: 0
+      portX: 595,
+      portY: 300
     },
     person: {
-      d: 'M 500 405 L 500 535',
+      d: 'M 500 385 L 500 450',
       id: 'conn-person',
-      targetAngle: 90
+      portX: 500,
+      portY: 385
     }
   };
 
   return (
     <svg
-      viewBox="0 0 1000 680"
+      viewBox="0 0 1000 600"
       className="absolute inset-0 w-full h-full pointer-events-none select-none z-0"
       preserveAspectRatio="xMidYMid meet"
     >
@@ -79,28 +83,22 @@ export function PathConnections({
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-
-        {/* Linear Gradients for inactive lines */}
-        <linearGradient id="grid-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#1E293B" stopOpacity="0.4" />
-          <stop offset="100%" stopColor="#0F172A" stopOpacity="0.1" />
-        </linearGradient>
       </defs>
 
-      {/* Decorative Circuit Grid Backdrop */}
-      <circle cx="500" cy="340" r="170" fill="none" stroke="rgba(51,65,85,0.18)" strokeDasharray="3 6" />
-      <circle cx="500" cy="340" r="260" fill="none" stroke="rgba(51,65,85,0.12)" strokeDasharray="4 8" />
+      {/* Decorative Circuit Grid Rings */}
+      <circle cx="500" cy="300" r="150" fill="none" stroke="rgba(51,65,85,0.22)" strokeDasharray="3 6" />
+      <circle cx="500" cy="300" r="230" fill="none" stroke="rgba(51,65,85,0.12)" strokeDasharray="4 8" />
 
       {/* Diagonal Technical Bus Cross-Hairs */}
-      <line x1="380" y1="220" x2="430" y2="270" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
-      <line x1="620" y1="220" x2="570" y2="270" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
-      <line x1="380" y1="460" x2="430" y2="410" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
-      <line x1="620" y1="460" x2="570" y2="410" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
+      <line x1="390" y1="190" x2="440" y2="240" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
+      <line x1="610" y1="190" x2="560" y2="240" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
+      <line x1="390" y1="410" x2="440" y2="360" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
+      <line x1="610" y1="410" x2="560" y2="360" stroke="rgba(51,65,85,0.25)" strokeWidth="1" strokeDasharray="2 3" />
 
       {/* Render the 4 main connection lines */}
       {(Object.entries(lineDefs) as [PathId, typeof lineDefs[PathId]][]).map(([key, def]) => {
         const isSelected = currentPath?.id === key;
-        const color = isSelected ? currentPath.color : 'rgba(51, 65, 85, 0.4)';
+        const color = isSelected ? currentPath.color : 'rgba(51, 65, 85, 0.45)';
         const filterId =
           key === 'work'
             ? 'line-glow-blue'
@@ -161,10 +159,10 @@ export function PathConnections({
               </>
             )}
 
-            {/* Anchor Port Terminals */}
+            {/* Center Port Terminal */}
             <circle
-              cx={key === 'work' ? 500 : key === 'play' ? 410 : key === 'stack' ? 590 : 500}
-              cy={key === 'work' ? 275 : key === 'play' ? 340 : key === 'stack' ? 340 : 405}
+              cx={def.portX}
+              cy={def.portY}
               r={isSelected ? '3.5' : '2.5'}
               fill={isSelected ? currentPath.color : '#334155'}
               className="transition-all duration-300"

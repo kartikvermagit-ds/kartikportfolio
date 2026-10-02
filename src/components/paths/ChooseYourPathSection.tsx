@@ -51,26 +51,41 @@ export function ChooseYourPathSection({ onPathSelected }: ChooseYourPathSectionP
     }
     return false;
   });
+  const [isDesktop, setIsDesktop] = useState<boolean>(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 1024;
+    }
+    return true;
+  });
+
   const sectionRef = useRef<HTMLElement | null>(null);
 
-  // Subscribe to media query changes
+  // Subscribe to media query & window resize changes
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
       const handleMotionChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
       mediaQuery.addEventListener('change', handleMotionChange);
 
-      return () => mediaQuery.removeEventListener('change', handleMotionChange);
+      const handleResize = () => {
+        setIsDesktop(window.innerWidth >= 1024);
+      };
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        mediaQuery.removeEventListener('change', handleMotionChange);
+        window.removeEventListener('resize', handleResize);
+      };
     }
   }, []);
 
   // Desktop subtle mouse parallax
   const handleMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (reducedMotion || window.innerWidth < 1024) return;
+    if (reducedMotion || !isDesktop) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-    setMouseOffset({ x: x * 10, y: y * 10 });
+    setMouseOffset({ x: x * 8, y: y * 8 });
   };
 
   const handleMouseLeave = () => {
@@ -186,56 +201,101 @@ export function ChooseYourPathSection({ onPathSelected }: ChooseYourPathSectionP
       </div>
 
       {/* ======================================================== */}
-      {/* DESKTOP VIEW: Connected Orbital Constellation (lg and above) */}
+      {/* DESKTOP VIEW: Connected Orbital Constellation            */}
       {/* ======================================================== */}
-      <div className="hidden lg:block relative z-10 max-w-[1080px] mx-auto my-6">
-        <div
-          className="relative w-full h-[640px] rounded-3xl bg-[#05070B]/80 border border-slate-800/80 p-6 backdrop-blur-sm overflow-hidden shadow-2xl transition-transform duration-300 ease-out"
-          style={
-            reducedMotion
-              ? undefined
-              : {
-                  transform: `translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0)`
-                }
-          }
-        >
-          {/* Animated SVG Connections */}
-          <PathConnections
-            activePath={activePath}
-            hoveredPath={hoveredPath}
-            reducedMotion={reducedMotion}
-          />
-
-          {/* 1. TOP NODE: WORK */}
-          <div className="absolute top-5 left-1/2 -translate-x-1/2 w-[340px] z-20">
-            <PathNode
-              path={workNode}
-              isActive={selectedPathId === 'work'}
-              isHovered={hoveredPathId === 'work'}
-              isDimmed={!!hoveredPathId && hoveredPathId !== 'work'}
-              isRouting={isRouting && selectedPathId === 'work'}
-              onHover={handleHover}
-              onSelect={handleSelectPath}
+      {isDesktop ? (
+        <div className="relative z-10 w-full max-w-[1040px] mx-auto my-6">
+          <div
+            className="relative w-full h-[600px] rounded-3xl bg-[#05070B]/85 border border-slate-800/80 p-4 backdrop-blur-sm overflow-hidden shadow-2xl transition-transform duration-300 ease-out"
+            style={
+              reducedMotion
+                ? undefined
+                : {
+                    transform: `translate3d(${mouseOffset.x * 0.4}px, ${mouseOffset.y * 0.4}px, 0)`
+                  }
+            }
+          >
+            {/* Animated SVG Connections */}
+            <PathConnections
+              activePath={activePath}
+              hoveredPath={hoveredPath}
               reducedMotion={reducedMotion}
             />
-          </div>
 
-          {/* 2. LEFT NODE: PLAY */}
-          <div className="absolute left-6 top-1/2 -translate-y-1/2 w-[300px] z-20">
-            <PathNode
-              path={playNode}
-              isActive={selectedPathId === 'play'}
-              isHovered={hoveredPathId === 'play'}
-              isDimmed={!!hoveredPathId && hoveredPathId !== 'play'}
-              isRouting={isRouting && selectedPathId === 'play'}
-              onHover={handleHover}
-              onSelect={handleSelectPath}
-              reducedMotion={reducedMotion}
-            />
-          </div>
+            {/* 1. TOP NODE: WORK */}
+            <div className="absolute top-3 left-1/2 -translate-x-1/2 w-[330px] z-20">
+              <PathNode
+                path={workNode}
+                isActive={selectedPathId === 'work'}
+                isHovered={hoveredPathId === 'work'}
+                isDimmed={!!hoveredPathId && hoveredPathId !== 'work'}
+                isRouting={isRouting && selectedPathId === 'work'}
+                onHover={handleHover}
+                onSelect={handleSelectPath}
+                reducedMotion={reducedMotion}
+              />
+            </div>
 
-          {/* 3. CENTER NODE: KARTIK.OS */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+            {/* 2. LEFT NODE: PLAY */}
+            <div className="absolute left-4 top-1/2 -translate-y-1/2 w-[290px] z-20">
+              <PathNode
+                path={playNode}
+                isActive={selectedPathId === 'play'}
+                isHovered={hoveredPathId === 'play'}
+                isDimmed={!!hoveredPathId && hoveredPathId !== 'play'}
+                isRouting={isRouting && selectedPathId === 'play'}
+                onHover={handleHover}
+                onSelect={handleSelectPath}
+                reducedMotion={reducedMotion}
+              />
+            </div>
+
+            {/* 3. CENTER NODE: KARTIK.OS */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-30">
+              <PathCentralNode
+                activePath={activePath}
+                hoveredPath={hoveredPath}
+                onOpenOS={handleOpenOS}
+                reducedMotion={reducedMotion}
+              />
+            </div>
+
+            {/* 4. RIGHT NODE: STACK */}
+            <div className="absolute right-4 top-1/2 -translate-y-1/2 w-[290px] z-20">
+              <PathNode
+                path={stackNode}
+                isActive={selectedPathId === 'stack'}
+                isHovered={hoveredPathId === 'stack'}
+                isDimmed={!!hoveredPathId && hoveredPathId !== 'stack'}
+                isRouting={isRouting && selectedPathId === 'stack'}
+                onHover={handleHover}
+                onSelect={handleSelectPath}
+                reducedMotion={reducedMotion}
+              />
+            </div>
+
+            {/* 5. BOTTOM NODE: PERSON */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[330px] z-20">
+              <PathNode
+                path={personNode}
+                isActive={selectedPathId === 'person'}
+                isHovered={hoveredPathId === 'person'}
+                isDimmed={!!hoveredPathId && hoveredPathId !== 'person'}
+                isRouting={isRouting && selectedPathId === 'person'}
+                onHover={handleHover}
+                onSelect={handleSelectPath}
+                reducedMotion={reducedMotion}
+              />
+            </div>
+          </div>
+        </div>
+      ) : (
+        /* ======================================================== */
+        /* MOBILE / TABLET VIEW: Deliberate Vertical Interactive Tree */
+        /* ======================================================== */
+        <div className="relative z-10 max-w-xl mx-auto flex flex-col items-center">
+          {/* Central KARTIK.OS Node Header */}
+          <div className="mb-8">
             <PathCentralNode
               activePath={activePath}
               hoveredPath={hoveredPath}
@@ -244,72 +304,29 @@ export function ChooseYourPathSection({ onPathSelected }: ChooseYourPathSectionP
             />
           </div>
 
-          {/* 4. RIGHT NODE: STACK */}
-          <div className="absolute right-6 top-1/2 -translate-y-1/2 w-[300px] z-20">
-            <PathNode
-              path={stackNode}
-              isActive={selectedPathId === 'stack'}
-              isHovered={hoveredPathId === 'stack'}
-              isDimmed={!!hoveredPathId && hoveredPathId !== 'stack'}
-              isRouting={isRouting && selectedPathId === 'stack'}
-              onHover={handleHover}
-              onSelect={handleSelectPath}
-              reducedMotion={reducedMotion}
-            />
-          </div>
+          {/* Vertical Pulse Line Track */}
+          <div className="relative w-full flex flex-col items-center">
+            <div className="absolute top-0 bottom-6 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-500/40 via-purple-500/30 to-emerald-500/20 pointer-events-none" />
 
-          {/* 5. BOTTOM NODE: PERSON */}
-          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 w-[340px] z-20">
-            <PathNode
-              path={personNode}
-              isActive={selectedPathId === 'person'}
-              isHovered={hoveredPathId === 'person'}
-              isDimmed={!!hoveredPathId && hoveredPathId !== 'person'}
-              isRouting={isRouting && selectedPathId === 'person'}
-              onHover={handleHover}
-              onSelect={handleSelectPath}
-              reducedMotion={reducedMotion}
-            />
+            {/* 4 Deliberate Sequential Nodes */}
+            <div className="w-full space-y-4 relative z-10">
+              {EXPLORATION_PATHS.map((path) => (
+                <PathNode
+                  key={path.id}
+                  path={path}
+                  isActive={selectedPathId === path.id}
+                  isHovered={hoveredPathId === path.id}
+                  isDimmed={!!hoveredPathId && hoveredPathId !== path.id}
+                  isRouting={isRouting && selectedPathId === path.id}
+                  onHover={handleHover}
+                  onSelect={handleSelectPath}
+                  reducedMotion={reducedMotion}
+                />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
-
-      {/* ======================================================== */}
-      {/* MOBILE / TABLET VIEW: Deliberate Vertical Interactive Tree */}
-      {/* ======================================================== */}
-      <div className="lg:hidden relative z-10 max-w-xl mx-auto flex flex-col items-center">
-        {/* Central KARTIK.OS Node Header */}
-        <div className="mb-8">
-          <PathCentralNode
-            activePath={activePath}
-            hoveredPath={hoveredPath}
-            onOpenOS={handleOpenOS}
-            reducedMotion={reducedMotion}
-          />
-        </div>
-
-        {/* Vertical Pulse Line Track */}
-        <div className="relative w-full flex flex-col items-center">
-          <div className="absolute top-0 bottom-6 left-1/2 -translate-x-1/2 w-0.5 bg-gradient-to-b from-blue-500/40 via-purple-500/30 to-emerald-500/20 pointer-events-none" />
-
-          {/* 4 Deliberate Sequential Nodes */}
-          <div className="w-full space-y-4 relative z-10">
-            {EXPLORATION_PATHS.map((path) => (
-              <PathNode
-                key={path.id}
-                path={path}
-                isActive={selectedPathId === path.id}
-                isHovered={hoveredPathId === path.id}
-                isDimmed={!!hoveredPathId && hoveredPathId !== path.id}
-                isRouting={isRouting && selectedPathId === path.id}
-                onHover={handleHover}
-                onSelect={handleSelectPath}
-                reducedMotion={reducedMotion}
-              />
-            ))}
-          </div>
-        </div>
-      </div>
+      )}
 
       {/* Dynamic Route Waypoints Preview Bar */}
       <AnimatePresence>
