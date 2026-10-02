@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, LineChart, Layers, Binary, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { BrainCircuit, LineChart, Layers, Binary, ArrowRight } from 'lucide-react';
 import { SectionHeading } from '../common/SectionHeading';
-import { PROCESS_STAGES } from '../../data/process';
+import { OrbitalMethodology } from '../methodology/OrbitalMethodology';
 
 const CAPABILITY_DOMAINS = [
   {
@@ -164,46 +164,8 @@ export function WhatIBuildSection() {
         })}
       </div>
 
-      {/* "HOW I BUILD: FROM IDEA → SYSTEM" WORKFLOW STREAM */}
-      <div className="p-8 sm:p-10 rounded-3xl bg-[#080D16]/80 border border-slate-800 relative overflow-hidden">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8 pb-4 border-b border-slate-800">
-          <div>
-            <span className="text-xs font-mono text-blue-400 uppercase tracking-widest block mb-1">
-              ENGINEERING METHODOLOGY
-            </span>
-            <h3 className="text-xl sm:text-2xl font-heading font-black text-white">
-              From Idea → System.
-            </h3>
-          </div>
-          <span className="text-xs font-mono text-slate-400">7-STAGE VERIFICATION PROTOCOL</span>
-        </div>
-
-        {/* 7-Stage Horizontal / Wrap Flow */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-3">
-          {PROCESS_STAGES.map((stage, idx) => (
-            <div
-              key={stage.step}
-              className="p-4 rounded-xl bg-[#05070B] border border-slate-800/90 hover:border-blue-500/40 transition-all flex flex-col justify-between group"
-            >
-              <div>
-                <span className="text-xs font-mono font-bold text-blue-400 block mb-2">
-                  {stage.step}
-                </span>
-                <h4 className="text-sm font-heading font-bold text-white mb-1 group-hover:text-blue-300 transition-colors">
-                  {stage.name}
-                </h4>
-                <p className="text-[11px] text-slate-400 font-sans leading-tight line-clamp-3">
-                  {stage.summary}
-                </p>
-              </div>
-
-              <div className="mt-4 pt-2 border-t border-slate-900 text-[9px] font-mono text-slate-500">
-                STAGE {idx + 1}/7
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      {/* "HOW I BUILD: FROM IDEA → SYSTEM" ORBITAL METHODOLOGY VISUALIZATION */}
+      <OrbitalMethodology />
     </section>
   );
 }
