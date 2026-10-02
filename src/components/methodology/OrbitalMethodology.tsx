@@ -365,9 +365,26 @@ export const AstronomicalPlanetCanvas: React.FC<PlanetCanvasProps> = ({
     canvas.style.width = `${canvasWidth}px`;
     canvas.style.height = `${canvasHeight}px`;
 
+    let isVisible = true;
+
+    // Discontinue canvas animation when scrolled offscreen
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry.isIntersecting;
+        if (!wasVisible && isVisible) {
+          lastTimeRef.current = performance.now();
+          animFrameRef.current = requestAnimationFrame(render);
+        }
+      },
+      { rootMargin: '100px 0px' }
+    );
+    observer.observe(canvas);
+
     const img = getPlanetImage(station.textureSrc);
 
     const render = (currentTime: number) => {
+      if (!isVisible) return;
       if (!lastTimeRef.current) lastTimeRef.current = currentTime;
       const dt = Math.min((currentTime - lastTimeRef.current) / 1000, 0.1);
       lastTimeRef.current = currentTime;
@@ -530,6 +547,7 @@ export const AstronomicalPlanetCanvas: React.FC<PlanetCanvasProps> = ({
     animFrameRef.current = requestAnimationFrame(render);
 
     return () => {
+      observer.disconnect();
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
   }, [station, isHovered, reducedMotion, canvasWidth, canvasHeight]);

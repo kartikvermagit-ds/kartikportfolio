@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { useDeviceTier } from '../../hooks/useDeviceTier';
 
 interface HeroCinematicBackgroundProps {
   mouseX?: number;
@@ -8,6 +9,7 @@ interface HeroCinematicBackgroundProps {
 
 export function HeroCinematicBackground({ mouseX = 0, mouseY = 0 }: HeroCinematicBackgroundProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { tier, prefersReducedMotion } = useDeviceTier();
 
   // High-performance canvas particle & shooting star simulation
   useEffect(() => {
@@ -17,6 +19,7 @@ export function HeroCinematicBackground({ mouseX = 0, mouseY = 0 }: HeroCinemati
     if (!ctx) return;
 
     let animationFrameId: number;
+    let isVisible = true;
     let width = (canvas.width = canvas.offsetWidth);
     let height = (canvas.height = canvas.offsetHeight);
 
@@ -27,7 +30,20 @@ export function HeroCinematicBackground({ mouseX = 0, mouseY = 0 }: HeroCinemati
     };
     window.addEventListener('resize', handleResize);
 
-    // Particle pool: mix of cool cosmic stars and warm lantern embers
+    // Pause rendering loop when Hero section is out of viewport
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        const wasVisible = isVisible;
+        isVisible = entry.isIntersecting;
+        if (!wasVisible && isVisible) {
+          animationFrameId = requestAnimationFrame(render);
+        }
+      },
+      { rootMargin: '100px 0px' }
+    );
+    observer.observe(canvas);
+
+    // Particle pool tuned by device tier
     interface Particle {
       x: number;
       y: number;
@@ -41,7 +57,7 @@ export function HeroCinematicBackground({ mouseX = 0, mouseY = 0 }: HeroCinemati
       pulseOffset: number;
     }
 
-    const particlesCount = window.innerWidth < 768 ? 35 : 75;
+    const particlesCount = prefersReducedMotion ? 15 : tier === 'LOW' ? 24 : tier === 'MEDIUM' ? 42 : 72;
     const particles: Particle[] = [];
 
     for (let i = 0; i < particlesCount; i++) {
@@ -162,16 +178,19 @@ export function HeroCinematicBackground({ mouseX = 0, mouseY = 0 }: HeroCinemati
         }
       }
 
-      animationFrameId = requestAnimationFrame(render);
+      if (isVisible) {
+        animationFrameId = requestAnimationFrame(render);
+      }
     };
 
     render();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener('resize', handleResize);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [tier, prefersReducedMotion]);
 
   // Parallax offsets based on mouse position
   const parallaxX = mouseX * 12;

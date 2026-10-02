@@ -149,39 +149,54 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
           </div>
 
           <div className="space-y-3">
-            {repos.slice(0, 6).map((repo, idx) => (
-              <a
-                key={repo.name + idx}
-                href={repo.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-4 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-105 transition-transform">
-                    <GitCommit className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-sm font-heading font-bold text-white group-hover:text-blue-400 transition-colors flex items-center gap-2">
-                      <span>{repo.name}</span>
-                      <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            {repos.length === 0 ? (
+              <div className="p-8 rounded-xl bg-slate-900/40 border border-slate-800 text-center">
+                <p className="text-sm font-sans text-slate-300 mb-2">
+                  Project data is temporarily unavailable. Explore the verified project collection instead.
+                </p>
+                <a
+                  href="#projects"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-blue-400 hover:text-blue-300 font-semibold"
+                >
+                  <span>VIEW VERIFIED PROJECTS</span>
+                  <span>→</span>
+                </a>
+              </div>
+            ) : (
+              repos.slice(0, 6).map((repo, idx) => (
+                <a
+                  key={repo.name + idx}
+                  href={repo.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-4 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-105 transition-transform">
+                      <GitCommit className="w-4 h-4" />
                     </div>
-                    <div className="text-xs text-slate-400 font-sans line-clamp-1">
-                      {repo.description || 'Verified engineering repository.'}
+                    <div>
+                      <div className="text-sm font-heading font-bold text-white group-hover:text-blue-400 transition-colors flex items-center gap-2">
+                        <span>{repo.name}</span>
+                        <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </div>
+                      <div className="text-xs text-slate-400 font-sans line-clamp-1">
+                        {repo.description || 'Verified engineering repository.'}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                <div className="flex items-center gap-3 self-end sm:self-center">
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0B1220] text-slate-300 border border-slate-800">
-                    {repo.language || 'Codebase'}
-                  </span>
-                  <span className="text-[10px] font-mono text-slate-500">
-                    {repo.updated_at ? new Date(repo.updated_at).toLocaleDateString() : 'Active'}
-                  </span>
-                </div>
-              </a>
-            ))}
+                  <div className="flex items-center gap-3 self-end sm:self-center">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0B1220] text-slate-300 border border-slate-800">
+                      {repo.language || 'Codebase'}
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-500">
+                      {repo.updated_at ? new Date(repo.updated_at).toLocaleDateString() : 'Active'}
+                    </span>
+                  </div>
+                </a>
+              ))
+            )}
           </div>
         </div>
       </div>

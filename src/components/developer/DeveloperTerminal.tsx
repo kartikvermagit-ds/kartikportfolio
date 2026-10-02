@@ -37,8 +37,16 @@ export const DeveloperTerminal: React.FC<DeveloperTerminalProps> = ({
     if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 50);
       onEggDiscovered?.('ee-terminal');
+
+      const handleGlobalKeyDown = (e: KeyboardEvent) => {
+        if (e.key === 'Escape') {
+          onClose();
+        }
+      };
+      window.addEventListener('keydown', handleGlobalKeyDown);
+      return () => window.removeEventListener('keydown', handleGlobalKeyDown);
     }
-  }, [isOpen, onEggDiscovered]);
+  }, [isOpen, onClose, onEggDiscovered]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

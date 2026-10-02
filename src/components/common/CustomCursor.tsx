@@ -15,8 +15,12 @@ export function CustomCursor() {
   const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Disable on touch devices
-    if (window.matchMedia('(pointer: coarse)').matches) {
+    // Disable on touch devices, small screens, and reduced motion
+    if (
+      window.matchMedia('(pointer: coarse)').matches ||
+      window.innerWidth < 768 ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    ) {
       setIsTouch(true);
       return;
     }

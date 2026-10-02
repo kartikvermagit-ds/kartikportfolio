@@ -21,7 +21,7 @@ export const ExplorationFloatingBadge: React.FC<ExplorationFloatingBadgeProps> =
 
   return (
     <div
-      className="fixed bottom-6 right-24 sm:right-28 z-30 transition-all duration-300"
+      className="fixed bottom-20 right-4 sm:bottom-6 sm:right-32 z-30 transition-all duration-300"
       role="region"
       aria-label="Portfolio Exploration Tracker"
     >
