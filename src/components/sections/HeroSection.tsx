@@ -24,6 +24,48 @@ export function HeroSection({ scrollY }: HeroSectionProps) {
 
       {/* Hero Content Layer */}
       <div className="relative z-10 max-w-4xl mx-auto my-auto text-center flex flex-col items-center">
+        {/* Holographic / Cyber Profile Portrait */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          className="relative mb-6 group"
+        >
+          {/* Outer Ambient Glow Aura */}
+          <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-orange-500/40 via-amber-500/30 to-blue-500/40 blur-xl opacity-75 group-hover:opacity-100 transition-opacity duration-700 animate-pulse pointer-events-none" />
+
+          {/* Futuristic HUD Corner Crosshairs */}
+          <div className="absolute -top-1 -left-1 text-[11px] font-mono text-orange-400/70 select-none pointer-events-none">⌜</div>
+          <div className="absolute -top-1 -right-1 text-[11px] font-mono text-orange-400/70 select-none pointer-events-none">⌝</div>
+          <div className="absolute -bottom-1 -left-1 text-[11px] font-mono text-orange-400/70 select-none pointer-events-none">⌞</div>
+          <div className="absolute -bottom-1 -right-1 text-[11px] font-mono text-orange-400/70 select-none pointer-events-none">⌟</div>
+
+          {/* Outer Cyber Gradient Ring */}
+          <div className="relative p-[3px] rounded-full bg-gradient-to-tr from-orange-500 via-amber-400 to-blue-400 shadow-2xl shadow-orange-500/25 transition-transform duration-500 group-hover:scale-105">
+            {/* Inner Dark Matting with Subtle Border */}
+            <div className="p-1 rounded-full bg-[#080D16] border border-slate-700/60 backdrop-blur-md">
+              <div className="relative w-28 h-28 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full overflow-hidden bg-slate-900">
+                <img
+                  src="/photo.jpeg"
+                  alt="Kartik Verma"
+                  className="w-full h-full object-cover object-[center_18%] filter contrast-[1.05] brightness-[1.02] group-hover:scale-110 transition-transform duration-700 ease-out"
+                />
+                {/* Dark Vignette Overlay for Theme Integration */}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070B]/50 via-transparent to-transparent pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          {/* Status Badge Pill */}
+          <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-[#080D16]/95 border border-orange-500/50 shadow-lg shadow-black/80 flex items-center gap-1.5 whitespace-nowrap text-[10px] sm:text-[11px] font-mono text-slate-200 backdrop-blur-md">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400" />
+            </span>
+            <span className="font-semibold text-orange-300 tracking-wider">AVAILABLE TO BUILD</span>
+          </div>
+        </motion.div>
+
         {/* Academic / Location Monospace Badge */}
         <motion.div
           initial={{ opacity: 0, y: -15 }}

@@ -124,9 +124,16 @@ export function AboutSection() {
               </svg>
 
               {/* Central Core: KARTIK */}
-              <div className="relative z-10 w-20 h-20 rounded-full bg-[#05070B] border-2 border-blue-500/60 shadow-xl shadow-blue-500/20 flex flex-col items-center justify-center text-center p-1 group">
-                <span className="text-[11px] font-mono font-bold text-white tracking-wider">KARTIK</span>
-                <span className="text-[9px] font-mono text-blue-400">ENGINEER</span>
+              <div className="relative z-10 w-20 h-20 rounded-full bg-[#05070B] border-2 border-orange-500/70 shadow-xl shadow-orange-500/30 flex flex-col items-center justify-center text-center p-0.5 group overflow-hidden">
+                <img
+                  src="/photo.jpeg"
+                  alt="Kartik Verma"
+                  className="w-full h-full object-cover object-[center_18%] rounded-full filter contrast-[1.05] brightness-[1.02] group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#05070B] via-transparent to-transparent opacity-70 pointer-events-none" />
+                <span className="absolute bottom-1 px-1.5 py-0.2 rounded bg-black/80 text-[8px] font-mono font-bold text-orange-300 tracking-wider border border-orange-500/40">
+                  KARTIK
+                </span>
               </div>
 
               {/* AI Node (Top) */}
