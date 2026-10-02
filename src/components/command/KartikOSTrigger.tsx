@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal } from 'lucide-react';
 
@@ -9,14 +9,12 @@ interface KartikOSTriggerProps {
 
 export function KartikOSTrigger({ onOpen, isOpen }: KartikOSTriggerProps) {
   const [isHovered, setIsHovered] = useState(false);
-  const [shortcutText, setShortcutText] = useState('Ctrl+K');
-
-  useEffect(() => {
-    if (typeof navigator !== 'undefined') {
-      const isMac = navigator.userAgent.includes('Mac');
-      setShortcutText(isMac ? '⌘K' : 'Ctrl+K');
+  const [shortcutText] = useState(() => {
+    if (typeof navigator !== 'undefined' && navigator.userAgent.includes('Mac')) {
+      return '⌘K';
     }
-  }, []);
+    return 'Ctrl+K';
+  });
 
   if (isOpen) return null;
 

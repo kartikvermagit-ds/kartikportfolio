@@ -1,4 +1,3 @@
-import React from 'react';
 import {
   Compass,
   Layers,
@@ -11,13 +10,11 @@ import {
   Code2,
   Sparkles,
   Search,
-  Eye,
   Activity,
   Cpu,
-  Database,
-  MapPin,
   Trophy,
-  Binary
+  Binary,
+  Globe
 } from 'lucide-react';
 import {
   GithubIcon,

@@ -37,6 +37,40 @@ export function useKartikOS({ repos = [] }: UseKartikOSProps = {}) {
     }
   }, []);
 
+  const openOS = useCallback(() => {
+    previousActiveElement.current = document.activeElement as HTMLElement | null;
+    setIsOpen(true);
+    setSearchQuery('');
+    setSelectedIndex(0);
+    setFeedback(null);
+  }, []);
+
+  const closeOS = useCallback(() => {
+    setIsOpen(false);
+    setFeedback(null);
+    if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
+      previousActiveElement.current.focus();
+    }
+  }, []);
+
+  const toggleOS = useCallback(() => {
+    setIsOpen((prev) => {
+      if (prev) {
+        setFeedback(null);
+        if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
+          previousActiveElement.current.focus();
+        }
+        return false;
+      } else {
+        previousActiveElement.current = document.activeElement as HTMLElement | null;
+        setSearchQuery('');
+        setSelectedIndex(0);
+        setFeedback(null);
+        return true;
+      }
+    });
+  }, []);
+
   // Listen to audio status changes from BackgroundMusic
   useEffect(() => {
     const handleMusicChange = (e: Event) => {
@@ -71,30 +105,6 @@ export function useKartikOS({ repos = [] }: UseKartikOSProps = {}) {
       return next;
     });
   }, []);
-
-  const openOS = useCallback(() => {
-    previousActiveElement.current = document.activeElement as HTMLElement | null;
-    setIsOpen(true);
-    setSearchQuery('');
-    setSelectedIndex(0);
-    setFeedback(null);
-  }, []);
-
-  const closeOS = useCallback(() => {
-    setIsOpen(false);
-    setFeedback(null);
-    if (previousActiveElement.current && typeof previousActiveElement.current.focus === 'function') {
-      previousActiveElement.current.focus();
-    }
-  }, []);
-
-  const toggleOS = useCallback(() => {
-    if (isOpen) {
-      closeOS();
-    } else {
-      openOS();
-    }
-  }, [isOpen, closeOS, openOS]);
 
   // Registry of all commands
   const rawCommands = useMemo(() => {

@@ -25,7 +25,7 @@ export interface SystemTelemetry {
   coreStatus: 'ONLINE' | 'STANDBY';
   webglStatus: 'READY' | 'UNAVAILABLE';
   audioStatus: 'ACTIVE' | 'MUTED';
-  githubStatus: 'CONNECTED' | 'OFFLINE';
+  githubStatus: 'CONNECTED' | 'ONLINE' | 'OFFLINE';
   reposCount: number;
   reducedMotion: boolean;
   registeredCommandsCount: number;
