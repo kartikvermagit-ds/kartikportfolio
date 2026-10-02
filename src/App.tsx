@@ -17,6 +17,7 @@ import { CodingJourneySection } from './components/sections/CodingJourneySection
 import { CurrentlyBuildingSection } from './components/sections/CurrentlyBuildingSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/sections/Footer';
+import { BackgroundMusic } from './components/common/BackgroundMusic';
 
 export function App() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -30,6 +31,9 @@ export function App() {
 
       {/* Custom Mouse Cursor with contextual hover states */}
       <CustomCursor />
+
+      {/* Floating Ambient Background Music Controller */}
+      <BackgroundMusic />
 
       {/* Top Global Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50 pointer-events-none">
