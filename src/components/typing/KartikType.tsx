@@ -139,6 +139,7 @@ export const KartikType: React.FC<KartikTypeProps> = ({ reducedMotion = false })
       passageId: activePassage.id,
       projectKey: activePassage.projectKey,
       wpm,
+      netWpm: wpm,
       grossWpm,
       accuracy,
       totalTyped: totalTypedCount,

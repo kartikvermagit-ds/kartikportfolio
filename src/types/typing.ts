@@ -27,6 +27,7 @@ export type GameStatus = 'IDLE' | 'READY' | 'RUNNING' | 'PAUSED' | 'COMPLETE';
 export interface TypingMetrics {
   wpm: number;
   netWpm: number;
+  grossWpm: number;
   accuracy: number;
   totalTyped: number;
   correctChars: number;
