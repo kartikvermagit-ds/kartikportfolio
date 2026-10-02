@@ -62,6 +62,14 @@ export const INITIAL_EASTER_EGGS: EasterEggItem[] = [
     isDiscovered: false
   },
   {
+    id: 'ee-typing-lab',
+    title: 'Precision Keystrokes',
+    category: 'DEVELOPER',
+    triggerDescription: 'Engaged the KARTIK.TYPE speed and precision laboratory',
+    discoveryMessage: 'Type fast. Think clearly. Build precisely.',
+    isDiscovered: false
+  },
+  {
     id: 'ee-deep-layer',
     title: 'The Deep Layer',
     category: 'SPECIAL',

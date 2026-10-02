@@ -21,6 +21,7 @@ import { HackathonJourneySection } from './components/sections/HackathonJourneyS
 import { CodingJourneySection } from './components/sections/CodingJourneySection';
 import { AlgorithmEscapeSection } from './components/sections/AlgorithmEscapeSection';
 import { CodeReactorSection } from './components/sections/CodeReactorSection';
+import { KartikTypeSection } from './components/sections/KartikTypeSection';
 import { SystemBuilderSection } from './components/sections/SystemBuilderSection';
 import { TechStackDetectiveSection } from './components/sections/TechStackDetectiveSection';
 import { SystemMapSection } from './components/sections/SystemMapSection';
@@ -218,6 +219,9 @@ export function App() {
 
         {/* TASK 8: Code Reactor Interactive Coding + Debugging Experience */}
         <CodeReactorSection />
+
+        {/* TASK 17: KARTIK.TYPE Interactive Developer Typing Laboratory */}
+        <KartikTypeSection />
 
         {/* TASK 9: System Builder Interactive Architecture Canvas */}
         <SystemBuilderSection />

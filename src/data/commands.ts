@@ -291,6 +291,21 @@ export function getCommandRegistry(callbacks: {
       }
     },
     {
+      id: 'nav-kartik-type',
+      title: 'Go to KARTIK.TYPE (Typing Lab)',
+      category: 'NAVIGATION',
+      description: 'Developer typing speed, accuracy, and consistency laboratory',
+      keywords: ['type', 'typing', 'kartik.type', 'monkeytype', 'wpm', 'keyboard', 'keystroke', 'lab'],
+      shortcut: 'K',
+      icon: Terminal,
+      badge: '09',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('kartik-type');
+      }
+    },
+    {
       id: 'nav-contact',
       title: 'Go to Contact Finale',
       category: 'NAVIGATION',
@@ -504,6 +519,21 @@ export function getCommandRegistry(callbacks: {
       action: () => {
         closeOS();
         navigateTo('system-map');
+      }
+    },
+    {
+      id: 'exp-kartik-type',
+      title: 'Open KARTIK.TYPE (Developer Typing Laboratory)',
+      category: 'EXPLORER',
+      description: 'Monkeytype-inspired developer typing lab measuring WPM, accuracy, and consistency across engineering passages',
+      keywords: ['type', 'typing', 'kartik.type', 'wpm', 'monkeytype', 'keyboard', 'speed', 'keystroke', 'test'],
+      shortcut: 'K',
+      icon: Terminal,
+      badge: 'LAB',
+      badgeType: 'blue',
+      action: () => {
+        closeOS();
+        navigateTo('kartik-type');
       }
     },
 

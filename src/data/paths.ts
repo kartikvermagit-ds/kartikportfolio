@@ -36,7 +36,8 @@ export const EXPLORATION_PATHS: PathItem[] = [
       { label: 'PYRAVEX', targetId: 'pyravex-mission', description: 'PYRAVEX satellite anomaly detection game' },
       { label: 'VERIDEXA', targetId: 'veridexa-verification', description: 'Veridexa document verification intelligence game' },
       { label: 'CHRONOSAT', targetId: 'chronosat-timemachine', description: 'ChronoSat temporal interpolation time machine' },
-      { label: 'ALGO ESCAPE', targetId: 'algorithm-escape', description: 'Interactive DSA problem-solving escape puzzle' }
+      { label: 'ALGO ESCAPE', targetId: 'algorithm-escape', description: 'Interactive DSA problem-solving escape puzzle' },
+      { label: 'TYPE LAB', targetId: 'kartik-type', description: 'KARTIK.TYPE speed & precision developer laboratory' }
     ]
   },
   {

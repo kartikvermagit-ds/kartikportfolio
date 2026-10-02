@@ -279,6 +279,10 @@ export function useExploration() {
       markDiscovered('exp-algorithm-escape', { triggerMilestoneId: 'ms-puzzle-resolver' });
     };
 
+    const handleKartikTypeEntered = () => {
+      markDiscovered('exp-kartik-type', { triggerMilestoneId: 'ms-type-lab' });
+    };
+
     window.addEventListener('open-exploration-panel', handleOpenPanel);
     window.addEventListener('close-exploration-panel', handleClosePanel);
     window.addEventListener('toggle-exploration-panel', handleTogglePanel);
@@ -290,6 +294,7 @@ export function useExploration() {
     window.addEventListener('tech-detective-entered', handleTechDetectiveEntered);
     window.addEventListener('system-map-entered', handleSystemMapEntered);
     window.addEventListener('algorithm-escape-entered', handleAlgorithmEscapeEntered);
+    window.addEventListener('kartik-type-entered', handleKartikTypeEntered);
 
     return () => {
       window.removeEventListener('open-exploration-panel', handleOpenPanel);
@@ -303,6 +308,7 @@ export function useExploration() {
       window.removeEventListener('tech-detective-entered', handleTechDetectiveEntered);
       window.removeEventListener('system-map-entered', handleSystemMapEntered);
       window.removeEventListener('algorithm-escape-entered', handleAlgorithmEscapeEntered);
+      window.removeEventListener('kartik-type-entered', handleKartikTypeEntered);
     };
   }, [markDiscovered, markMilestone]);
 

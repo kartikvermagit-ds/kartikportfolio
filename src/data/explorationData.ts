@@ -99,6 +99,14 @@ export const EXPLORATION_ITEMS: ExplorationItem[] = [
     category: 'PLAY',
     isInteractive: true
   },
+  {
+    id: 'exp-kartik-type',
+    targetId: 'kartik-type',
+    label: 'KARTIK.TYPE Lab',
+    sublabel: 'Developer-grade typing speed & precision laboratory',
+    category: 'PLAY',
+    isInteractive: true
+  },
 
   // ==========================================
   // 03 STACK (5 items)
@@ -229,6 +237,13 @@ export const EXPLORATION_MILESTONES: ExplorationMilestone[] = [
     description: 'Started the Code Reactor interactive developer workstation.',
     category: 'PLAY',
     associatedItemId: 'exp-code-reactor'
+  },
+  {
+    id: 'ms-type-lab',
+    title: 'TYPE LAB EXPLORED',
+    description: 'Entered the KARTIK.TYPE speed and precision laboratory.',
+    category: 'PLAY',
+    associatedItemId: 'exp-kartik-type'
   },
   {
     id: 'ms-system-thinker',
