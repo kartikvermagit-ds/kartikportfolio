@@ -322,7 +322,8 @@ export function getCommandRegistry(callbacks: {
       badgeType: 'amber' as const,
       action: () => {
         closeOS();
-        navigateTo(proj.id);
+        window.dispatchEvent(new CustomEvent('open-case-study', { detail: { projectId: proj.id } }));
+        navigateTo('work');
       }
     })),
 
