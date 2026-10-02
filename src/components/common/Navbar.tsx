@@ -61,13 +61,13 @@ export function Navbar({ scrollY }: NavbarProps) {
             href="#"
             className="flex items-center gap-3 group no-underline text-inherit"
           >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-indigo-600 p-[1px] flex items-center justify-center shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-[#05070B] rounded-[7px] flex items-center justify-center font-mono font-bold text-xs text-blue-400">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 via-amber-500 to-blue-600 p-[1px] flex items-center justify-center shadow-lg shadow-orange-500/25 group-hover:scale-105 transition-transform">
+              <div className="w-full h-full bg-[#05070B] rounded-[7px] flex items-center justify-center font-mono font-bold text-xs text-orange-400">
                 KV
               </div>
             </div>
             <div className="flex flex-col">
-              <span className="font-heading font-bold text-sm tracking-tight text-white group-hover:text-blue-400 transition-colors">
+              <span className="font-heading font-bold text-sm tracking-tight text-white group-hover:text-orange-400 transition-colors">
                 KARTIK VERMA
               </span>
               <span className="text-[10px] font-mono text-slate-400 -mt-1 hidden sm:block">
@@ -86,7 +86,7 @@ export function Navbar({ scrollY }: NavbarProps) {
                   href={link.href}
                   className={`px-3 py-1 text-xs font-mono font-medium rounded-full transition-all ${
                     isActive
-                      ? 'text-white bg-blue-600/30 border border-blue-500/40 shadow-sm shadow-blue-500/20'
+                      ? 'text-orange-200 bg-orange-500/20 border border-orange-500/40 shadow-sm shadow-orange-500/20'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-white/5'
                   }`}
                 >
@@ -103,9 +103,9 @@ export function Navbar({ scrollY }: NavbarProps) {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="github"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium text-slate-300 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 rounded-full transition-all hover:border-blue-500/50"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-medium text-slate-300 bg-slate-900/80 hover:bg-slate-800 border border-slate-700/60 rounded-full transition-all hover:border-orange-500/60 hover:text-orange-200"
             >
-              <GithubIcon className="w-3.5 h-3.5" />
+              <GithubIcon className="w-3.5 h-3.5 text-orange-400" />
               <span>GitHub</span>
               <ArrowUpRight className="w-3 h-3 text-slate-400" />
             </a>

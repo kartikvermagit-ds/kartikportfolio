@@ -25,7 +25,7 @@ export function Footer() {
             href={SOCIAL_LINKS.github}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-orange-400 transition-colors"
           >
             GitHub
           </a>
@@ -34,7 +34,7 @@ export function Footer() {
             href={SOCIAL_LINKS.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-orange-400 transition-colors"
           >
             LinkedIn
           </a>
@@ -43,7 +43,7 @@ export function Footer() {
             href={SOCIAL_LINKS.leetcode}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-orange-400 transition-colors"
           >
             LeetCode
           </a>
@@ -52,7 +52,7 @@ export function Footer() {
             href={SOCIAL_LINKS.codeforces}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-orange-400 transition-colors"
           >
             Codeforces
           </a>
@@ -61,7 +61,7 @@ export function Footer() {
             href={SOCIAL_LINKS.hackerrank}
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors"
+            className="hover:text-orange-400 transition-colors"
           >
             HackerRank
           </a>
@@ -75,7 +75,7 @@ export function Footer() {
           <button
             type="button"
             onClick={scrollToTop}
-            className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-white border border-slate-800 transition-colors"
+            className="p-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-orange-400 border border-slate-800 hover:border-orange-500/50 transition-all hover:scale-105"
             title="Scroll to top"
           >
             <ArrowUp className="w-3.5 h-3.5" />

@@ -31,7 +31,7 @@ export function SectionHeading({
           }`}
         >
           {number && (
-            <span className="text-blue-400 font-bold px-2 py-0.5 rounded bg-blue-500/10 border border-blue-500/20">
+            <span className="text-orange-400 font-bold px-2 py-0.5 rounded bg-orange-500/10 border border-orange-500/30 shadow-sm shadow-orange-500/10">
               {number}
             </span>
           )}
@@ -53,6 +53,9 @@ export function SectionHeading({
       >
         {title}
       </motion.h2>
+
+      {/* Signature warm orange accent line */}
+      <div className={`h-[2px] w-12 bg-gradient-to-r from-orange-500 via-amber-400 to-transparent mb-3 ${center ? 'mx-auto' : ''}`} />
 
       {/* Editorial Subtitle with Controlled Reading Width */}
       {subtitle && (

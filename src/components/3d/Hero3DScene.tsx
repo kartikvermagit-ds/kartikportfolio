@@ -134,6 +134,7 @@ function DeepSpaceField() {
     const cBlue = new THREE.Color('#3B82F6');
     const cViolet = new THREE.Color('#8B5CF6');
     const cCyan = new THREE.Color('#22D3EE');
+    const cOrange = new THREE.Color('#F97316');
 
     for (let i = 0; i < count; i++) {
       const radius = 3.5 + Math.random() * 8.5;
@@ -145,7 +146,7 @@ function DeepSpaceField() {
       pos[i * 3 + 2] = (Math.random() - 0.5) * 12;
 
       const seed = Math.random();
-      const mixed = seed > 0.6 ? cBlue : seed > 0.3 ? cViolet : cCyan;
+      const mixed = seed > 0.75 ? cOrange : seed > 0.45 ? cBlue : seed > 0.2 ? cViolet : cCyan;
       col[i * 3] = mixed.r;
       col[i * 3 + 1] = mixed.g;
       col[i * 3 + 2] = mixed.b;
@@ -202,6 +203,7 @@ export function Hero3DScene({ mouse, scrollY }: SceneProps = {}) {
         <ambientLight intensity={0.45} />
         <pointLight position={[6, 6, 6]} color="#3B82F6" intensity={1.4} distance={22} />
         <pointLight position={[-6, -4, -4]} color="#8B5CF6" intensity={1.2} distance={22} />
+        <pointLight position={[0, -4, 4]} color="#F97316" intensity={1.3} distance={20} />
         <directionalLight position={[0, 8, 4]} intensity={0.5} />
 
         <CoordinateGrid />

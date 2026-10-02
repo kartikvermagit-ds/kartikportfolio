@@ -105,7 +105,7 @@ export function BackgroundMusic() {
           aria-label={isPlaying ? 'Mute Background Audio' : 'Play Background Audio'}
           className={`flex items-center gap-2.5 px-3.5 py-2 rounded-full border backdrop-blur-md transition-all duration-300 shadow-xl ${
             isPlaying
-              ? 'bg-[#080D16]/90 border-blue-500/50 shadow-blue-500/10 text-white hover:border-blue-400'
+              ? 'bg-[#080D16]/90 border-orange-500/50 shadow-orange-500/15 text-white hover:border-orange-400'
               : 'bg-[#080D16]/70 border-slate-800/80 text-slate-400 hover:text-slate-200 hover:border-slate-700'
           }`}
         >
@@ -114,21 +114,21 @@ export function BackgroundMusic() {
             <span
               className={`w-[2.5px] rounded-full transition-all duration-300 ${
                 isPlaying
-                  ? 'bg-blue-400 animate-[pulse_0.8s_ease-in-out_infinite] h-3'
+                  ? 'bg-orange-400 animate-[pulse_0.8s_ease-in-out_infinite] h-3'
                   : 'bg-slate-600 h-1.5'
               }`}
             />
             <span
               className={`w-[2.5px] rounded-full transition-all duration-300 ${
                 isPlaying
-                  ? 'bg-indigo-400 animate-[pulse_1.2s_ease-in-out_infinite_0.2s] h-3.5'
+                  ? 'bg-amber-400 animate-[pulse_1.2s_ease-in-out_infinite_0.2s] h-3.5'
                   : 'bg-slate-600 h-1'
               }`}
             />
             <span
               className={`w-[2.5px] rounded-full transition-all duration-300 ${
                 isPlaying
-                  ? 'bg-purple-400 animate-[pulse_0.9s_ease-in-out_infinite_0.4s] h-2.5'
+                  ? 'bg-blue-400 animate-[pulse_0.9s_ease-in-out_infinite_0.4s] h-2.5'
                   : 'bg-slate-600 h-2'
               }`}
             />
@@ -138,8 +138,8 @@ export function BackgroundMusic() {
           <div className="flex items-center gap-1.5 text-[11px] font-mono tracking-wider font-semibold">
             {isPlaying ? (
               <>
-                <Volume2 className="w-3.5 h-3.5 text-blue-400" />
-                <span className="text-slate-200 hidden sm:inline">SOUND ON</span>
+                <Volume2 className="w-3.5 h-3.5 text-orange-400" />
+                <span className="text-orange-200 hidden sm:inline">SOUND ON</span>
               </>
             ) : (
               <>
@@ -160,7 +160,7 @@ export function BackgroundMusic() {
               transition={{ duration: 0.2 }}
               className="absolute left-full top-1/2 -translate-y-1/2 ml-1 px-3 py-1.5 rounded-lg bg-[#05070B]/95 border border-slate-700/80 backdrop-blur-md shadow-2xl text-[10px] font-mono text-slate-300 whitespace-nowrap pointer-events-none flex items-center gap-2"
             >
-              <Music className="w-3 h-3 text-purple-400 shrink-0" />
+              <Music className="w-3 h-3 text-orange-400 shrink-0" />
               <span>Moment of Peace</span>
               <span className="text-slate-500">•</span>
               <span className="text-slate-400">Mickeyscat</span>

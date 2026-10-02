@@ -65,9 +65,9 @@ export function CustomCursor() {
 
   return (
     <>
-      {/* Central High-Performance Dot */}
+      {/* Central High-Performance Dot with warm solar amber glow */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full bg-blue-400"
+        className="fixed top-0 left-0 pointer-events-none z-50 rounded-full bg-gradient-to-r from-orange-400 to-amber-300"
         style={{
           width: 5,
           height: 5,
@@ -75,7 +75,7 @@ export function CustomCursor() {
           y: cursorY,
           translateX: '-50%',
           translateY: '-50%',
-          boxShadow: '0 0 10px rgba(59, 130, 246, 0.9)',
+          boxShadow: '0 0 10px rgba(249, 115, 22, 0.9), 0 0 4px rgba(251, 146, 60, 0.9)',
           opacity: isExpanded ? 0 : 1,
           willChange: 'transform'
         }}
@@ -83,7 +83,7 @@ export function CustomCursor() {
 
       {/* Outer Spring Follower Ring / Interactive Pill */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 flex items-center justify-center rounded-full border border-blue-500/50 backdrop-blur-[1px]"
+        className="fixed top-0 left-0 pointer-events-none z-50 flex items-center justify-center rounded-full border backdrop-blur-[1px]"
         style={{
           width: size,
           height: size,
@@ -93,13 +93,18 @@ export function CustomCursor() {
           translateY: '-50%',
           backgroundColor:
             cursorType === 'project'
-              ? 'rgba(59, 130, 246, 0.9)'
+              ? 'rgba(234, 88, 12, 0.9)'
               : cursorType === 'github'
               ? 'rgba(15, 23, 42, 0.92)'
               : cursorType === 'pointer'
-              ? 'rgba(59, 130, 246, 0.15)'
+              ? 'rgba(249, 115, 22, 0.12)'
               : 'rgba(59, 130, 246, 0.04)',
-          borderColor: isExpanded ? 'rgba(255, 255, 255, 0.4)' : 'rgba(59, 130, 246, 0.4)',
+          borderColor: isExpanded
+            ? 'rgba(255, 255, 255, 0.5)'
+            : cursorType === 'pointer'
+            ? 'rgba(249, 115, 22, 0.55)'
+            : 'rgba(59, 130, 246, 0.35)',
+          boxShadow: cursorType === 'pointer' ? '0 0 16px rgba(249, 115, 22, 0.25)' : 'none',
           willChange: 'transform, width, height'
         }}
       >

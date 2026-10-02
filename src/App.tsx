@@ -25,7 +25,7 @@ export function App() {
   const { repos, userProfile, isLoading: isGitLoading } = useGitHubData();
 
   return (
-    <div className="relative min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-blue-600/30 selection:text-blue-200">
+    <div className="relative min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-orange-500/25 selection:text-orange-200">
       {/* Loading Sequence */}
       <LoadingScreen onLoaded={() => setIsLoaded(true)} />
 
@@ -36,9 +36,9 @@ export function App() {
       <BackgroundMusic />
 
       {/* Top Global Scroll Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 h-[2px] bg-transparent z-50 pointer-events-none">
+      <div className="fixed top-0 left-0 right-0 h-[2.5px] bg-transparent z-50 pointer-events-none">
         <div
-          className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 transition-all duration-75 ease-out shadow-sm shadow-blue-500"
+          className="h-full bg-gradient-to-r from-orange-500 via-amber-400 via-blue-500 to-purple-500 transition-all duration-75 ease-out shadow-sm shadow-orange-500/50"
           style={{ width: `${scrollProgress * 100}%` }}
         />
       </div>

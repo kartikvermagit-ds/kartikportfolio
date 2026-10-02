@@ -65,15 +65,15 @@ export function Card3D({ children, className = '' }: Card3DProps) {
         }}
         transition={{ type: 'spring', stiffness: 300, damping: 25 }}
         className={`relative overflow-hidden rounded-2xl border border-slate-800/80 bg-[#080D16]/90 backdrop-blur-md preserve-3d transition-colors duration-300 ${
-          isHovered ? 'border-blue-500/50 shadow-2xl shadow-blue-500/10' : ''
+          isHovered ? 'border-orange-500/40 shadow-2xl shadow-orange-500/10' : ''
         } ${className}`}
       >
         {/* Hardware-Accelerated Dynamic Light Follower using CSS Variables */}
         <div
           className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300"
           style={{
-            opacity: isHovered ? 0.35 : 0,
-            background: 'radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(59, 130, 246, 0.4), transparent 60%)'
+            opacity: isHovered ? 0.38 : 0,
+            background: 'radial-gradient(circle at var(--spotlight-x, 50%) var(--spotlight-y, 50%), rgba(249, 115, 22, 0.3) 0%, rgba(59, 130, 246, 0.22) 40%, transparent 70%)'
           }}
         />
 
