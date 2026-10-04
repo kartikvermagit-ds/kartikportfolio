@@ -17,7 +17,7 @@ export function PathCentralNode({
   reducedMotion = false
 }: PathCentralNodeProps) {
   const currentPath = hoveredPath || activePath;
-  const currentAccent = currentPath ? currentPath.color : '#3B82F6';
+  const currentAccent = currentPath ? currentPath.color : '#F97316';
 
   return (
     <div className="relative flex flex-col items-center justify-center">

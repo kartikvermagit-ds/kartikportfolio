@@ -54,14 +54,40 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left: Summary Metrics Cards */}
         <div className="lg:col-span-4 flex flex-col gap-4">
-          <div className="p-6 rounded-2xl bg-[#0B1220] border border-slate-800 shadow-xl relative overflow-hidden">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-xs font-mono text-slate-400">GITHUB IDENTITY</span>
-              <GithubIcon className="w-5 h-5 text-slate-300" />
+          <div className="p-6 rounded-2xl bg-[#0B1220] border border-slate-800 shadow-xl relative overflow-hidden group hover:border-orange-500/40 transition-colors">
+            {/* Ambient telemetry glowing curve at top of card (inspired by laptop dashboard) */}
+            <div className="absolute top-0 left-0 right-0 h-16 pointer-events-none opacity-40 overflow-hidden">
+              <svg viewBox="0 0 300 60" className="w-full h-full preserve-3d" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="amberGlow" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#F59E0B" stopOpacity="0.4" />
+                    <stop offset="100%" stopColor="#F97316" stopOpacity="0.0" />
+                  </linearGradient>
+                </defs>
+                <path
+                  d="M0,45 Q40,10 80,30 T160,15 T240,35 T300,20 L300,60 L0,60 Z"
+                  fill="url(#amberGlow)"
+                />
+                <path
+                  d="M0,45 Q40,10 80,30 T160,15 T240,35 T300,20"
+                  fill="none"
+                  stroke="#F59E0B"
+                  strokeWidth="2"
+                  filter="drop-shadow(0 0 6px rgba(245, 158, 11, 0.8))"
+                />
+              </svg>
             </div>
 
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 rounded-full border border-blue-500/40 p-0.5 bg-slate-900">
+            <div className="flex items-center justify-between mb-4 relative z-10">
+              <span className="text-xs font-mono text-amber-400/90 font-semibold tracking-wider flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                GITHUB IDENTITY
+              </span>
+              <GithubIcon className="w-5 h-5 text-orange-400" />
+            </div>
+
+            <div className="flex items-center gap-3 mb-4 relative z-10">
+              <div className="w-12 h-12 rounded-full border-2 border-orange-500/50 p-0.5 bg-slate-900 shadow-[0_0_12px_rgba(249,115,22,0.3)]">
                 <img
                   src="https://avatars.githubusercontent.com/u/230720139?v=4"
                   alt="Kartik Verma"
@@ -74,28 +100,34 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-mono text-blue-400 hover:underline"
+                  className="text-xs font-mono text-orange-400 hover:text-amber-300 transition-colors"
                 >
                   @kartikvermagit-ds
                 </a>
               </div>
             </div>
 
-            <p className="text-xs text-slate-400 font-sans mb-6">
+            <p className="text-xs text-slate-400 font-sans mb-6 relative z-10">
               {userProfile.bio}
             </p>
 
-            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-slate-900/80 border border-slate-800 text-center">
+            <div className="grid grid-cols-3 gap-2 p-3 rounded-xl bg-slate-900/90 border border-slate-800 text-center relative z-10">
               <div>
-                <div className="text-base font-heading font-bold text-white">{userProfile.public_repos}</div>
+                <div className="text-lg font-heading font-black text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                  {userProfile.public_repos}
+                </div>
                 <div className="text-[10px] font-mono text-slate-400">Public Repos</div>
               </div>
               <div>
-                <div className="text-base font-heading font-bold text-white">{userProfile.followers}</div>
+                <div className="text-lg font-heading font-black text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                  {userProfile.followers}
+                </div>
                 <div className="text-[10px] font-mono text-slate-400">Followers</div>
               </div>
               <div>
-                <div className="text-base font-heading font-bold text-white">{totalStars}</div>
+                <div className="text-lg font-heading font-black text-amber-400 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]">
+                  {totalStars}
+                </div>
                 <div className="text-[10px] font-mono text-slate-400">Stars</div>
               </div>
             </div>
@@ -105,28 +137,32 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
               target="_blank"
               rel="noopener noreferrer"
               data-cursor="github"
-              className="mt-6 w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-lg shadow-blue-500/20"
+              className="mt-6 w-full py-2.5 rounded-xl bg-gradient-to-r from-orange-600 via-orange-500 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white font-mono text-xs font-semibold flex items-center justify-center gap-2 transition-all shadow-lg shadow-orange-500/25 border border-orange-400/40 relative z-10 hover:scale-[1.02]"
             >
               <span>Explore GitHub Profile</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
 
-          {/* Language Breakdown */}
-          <div className="p-6 rounded-2xl bg-[#0B1220] border border-slate-800">
-            <span className="text-xs font-mono text-slate-400 block mb-4 uppercase">
-              Primary Language Distribution
-            </span>
-            <div className="space-y-3">
+          {/* Language Breakdown with Glowing Warm Amber Meters */}
+          <div className="p-6 rounded-2xl bg-[#0B1220] border border-slate-800 hover:border-orange-500/40 transition-colors">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-xs font-mono text-amber-400/90 font-semibold uppercase tracking-wider flex items-center gap-1.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+                Primary Language Distribution
+              </span>
+              <span className="text-[10px] font-mono text-slate-500">LIVE METRICS</span>
+            </div>
+            <div className="space-y-3.5">
               {languageDistribution.map((lang: { name: string; count: number; percent: number }) => (
                 <div key={lang.name}>
-                  <div className="flex justify-between text-xs font-mono mb-1">
-                    <span className="text-slate-200">{lang.name}</span>
-                    <span className="text-slate-400">{lang.count} repos ({lang.percent}%)</span>
+                  <div className="flex justify-between text-xs font-mono mb-1.5">
+                    <span className="text-slate-200 font-medium">{lang.name}</span>
+                    <span className="text-amber-400 font-bold">{lang.count} repos ({lang.percent}%)</span>
                   </div>
-                  <div className="w-full h-1.5 rounded-full bg-slate-900 overflow-hidden">
+                  <div className="w-full h-2 rounded-full bg-slate-900/90 overflow-hidden border border-slate-800/80 p-[1px]">
                     <div
-                      className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                      className="h-full bg-gradient-to-r from-orange-500 via-amber-400 to-amber-300 rounded-full shadow-[0_0_10px_rgba(249,115,22,0.5)] transition-all duration-500"
                       style={{ width: `${lang.percent}%` }}
                     />
                   </div>
@@ -137,15 +173,15 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
         </div>
 
         {/* Right: Recently Updated Repositories Stream */}
-        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#0B1220] border border-slate-800 shadow-xl">
+        <div className="lg:col-span-8 p-6 rounded-2xl bg-[#0B1220] border border-slate-800 shadow-xl hover:border-orange-500/30 transition-colors">
           <div className="flex items-center justify-between pb-4 border-b border-slate-800 mb-6">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-mono text-slate-300 font-semibold uppercase">
+              <span className="w-2 h-2 rounded-full bg-orange-400 animate-pulse" />
+              <span className="text-xs font-mono text-slate-200 font-semibold uppercase">
                 Recent Codebase Commits &amp; Activity
               </span>
             </div>
-            <span className="text-[11px] font-mono text-slate-500">SORTED BY RECENT PUSH</span>
+            <span className="text-[11px] font-mono text-amber-400/80">SORTED BY RECENT PUSH</span>
           </div>
 
           <div className="space-y-3">
@@ -156,7 +192,7 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
                 </p>
                 <a
                   href="#projects"
-                  className="inline-flex items-center gap-1.5 text-xs font-mono text-blue-400 hover:text-blue-300 font-semibold"
+                  className="inline-flex items-center gap-1.5 text-xs font-mono text-orange-400 hover:text-amber-300 font-semibold"
                 >
                   <span>VIEW VERIFIED PROJECTS</span>
                   <span>→</span>
@@ -169,14 +205,14 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
                   href={repo.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="p-4 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
+                  className="p-4 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800/80 hover:border-orange-500/50 hover:shadow-[0_0_20px_rgba(249,115,22,0.12)] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 group"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="p-2 rounded-lg bg-blue-500/10 text-blue-400 border border-blue-500/20 group-hover:scale-105 transition-transform">
+                    <div className="p-2 rounded-lg bg-orange-500/10 text-orange-400 border border-orange-500/25 group-hover:scale-105 transition-transform">
                       <GitCommit className="w-4 h-4" />
                     </div>
                     <div>
-                      <div className="text-sm font-heading font-bold text-white group-hover:text-blue-400 transition-colors flex items-center gap-2">
+                      <div className="text-sm font-heading font-bold text-white group-hover:text-orange-400 transition-colors flex items-center gap-2">
                         <span>{repo.name}</span>
                         <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </div>
@@ -187,10 +223,10 @@ export function GitHubLiveSection({ repos, userProfile, isLoading }: GitHubLiveS
                   </div>
 
                   <div className="flex items-center gap-3 self-end sm:self-center">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#0B1220] text-slate-300 border border-slate-800">
+                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#080D16] text-amber-300 border border-orange-500/25">
                       {repo.language || 'Codebase'}
                     </span>
-                    <span className="text-[10px] font-mono text-slate-500">
+                    <span className="text-[10px] font-mono text-slate-400">
                       {repo.updated_at ? new Date(repo.updated_at).toLocaleDateString() : 'Active'}
                     </span>
                   </div>

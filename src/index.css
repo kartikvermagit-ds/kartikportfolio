@@ -77,8 +77,20 @@
 .bg-radial-gradient {
   background: 
     radial-gradient(circle at 50% 25%, rgba(59, 130, 246, 0.09) 0%, rgba(139, 92, 246, 0.04) 45%, transparent 70%),
-    radial-gradient(circle at 85% 65%, rgba(249, 115, 22, 0.07) 0%, transparent 55%),
-    radial-gradient(circle at 15% 85%, rgba(249, 115, 22, 0.05) 0%, transparent 50%);
+    radial-gradient(circle at 85% 35%, rgba(245, 158, 11, 0.10) 0%, rgba(249, 115, 22, 0.05) 30%, transparent 60%),
+    radial-gradient(circle at 15% 85%, rgba(249, 115, 22, 0.06) 0%, transparent 50%);
+}
+
+/* Ambient Warm Golden/Amber Lamp Illumination layer */
+.ambient-warm-glow {
+  position: fixed;
+  pointer-events: none;
+  inset: 0;
+  z-index: 0;
+  background: 
+    radial-gradient(circle at 85% 15%, rgba(245, 158, 11, 0.11) 0%, rgba(249, 115, 22, 0.06) 35%, transparent 65%),
+    radial-gradient(circle at 12% 50%, rgba(234, 88, 12, 0.07) 0%, transparent 48%),
+    radial-gradient(circle at 75% 85%, rgba(245, 158, 11, 0.08) 0%, transparent 55%);
 }
 
 /* Glow effects */
@@ -94,12 +106,20 @@
   box-shadow: 0 0 35px -5px rgba(249, 115, 22, 0.35);
 }
 
+.glow-amber {
+  box-shadow: 0 0 25px -2px rgba(245, 158, 11, 0.4);
+}
+
 .text-glow-blue {
   text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }
 
 .text-glow-orange {
   text-shadow: 0 0 20px rgba(249, 115, 22, 0.6);
+}
+
+.text-glow-amber {
+  text-shadow: 0 0 16px rgba(245, 158, 11, 0.65);
 }
 
 /* Glassmorphism panel subtle */
@@ -112,7 +132,8 @@
 
 .glass-panel-hover:hover {
   background: rgba(17, 24, 39, 0.85);
-  border-color: rgba(59, 130, 246, 0.35);
+  border-color: rgba(249, 115, 22, 0.4);
+  box-shadow: 0 0 30px -5px rgba(249, 115, 22, 0.15);
 }
 
 /* Perspective utilities for 3D cards */

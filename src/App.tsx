@@ -99,6 +99,9 @@ export function App() {
 
   return (
     <div className="relative min-h-screen bg-[#05070B] text-[#F8FAFC] selection:bg-orange-500/25 selection:text-orange-200">
+      {/* Ambient Warm Golden/Amber Lamp Illumination layer */}
+      <div className="ambient-warm-glow pointer-events-none" aria-hidden="true" />
+
       {/* Loading Sequence */}
       <LoadingScreen onLoaded={() => setIsLoaded(true)} />
 
